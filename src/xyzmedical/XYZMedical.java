@@ -14,10 +14,7 @@ public class XYZMedical {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        //This is in the dev branch.
+    public static void main(String[] args) throws ClassNotFoundException {
+
     }
-    
 }
