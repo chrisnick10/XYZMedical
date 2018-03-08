@@ -5,6 +5,9 @@
  */
 package xyzmedical;
 
+import javafx.scene.layout.GridPane;
+import xyzmedical.view.LoginPane;
+
 /**
  *
  * @author cjwn
@@ -15,6 +18,8 @@ public class XYZMedical {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ClassNotFoundException {
-
+            // This is the entry point for the application.
+            
+            
     }
 }
