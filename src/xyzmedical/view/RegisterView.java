@@ -34,7 +34,7 @@ public class RegisterView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         usernameTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        registerButton = new javax.swing.JButton();
+        submitButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         passwordTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -51,10 +51,10 @@ public class RegisterView extends javax.swing.JFrame {
 
         jLabel2.setText("Username");
 
-        registerButton.setText("Register");
-        registerButton.addActionListener(new java.awt.event.ActionListener() {
+        submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerButtonActionPerformed(evt);
+                submitButtonActionPerformed(evt);
             }
         });
 
@@ -86,8 +86,8 @@ public class RegisterView extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(userTypeBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(registerButton)))
+                        .addGap(76, 76, 76)
+                        .addComponent(submitButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -106,7 +106,7 @@ public class RegisterView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(registerButton)
+                .addComponent(submitButton)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -136,7 +136,7 @@ public class RegisterView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordTextFieldActionPerformed
 
-    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
         String uname = usernameTextField.getText();
         String upass = passwordTextField.getText();
@@ -151,7 +151,7 @@ public class RegisterView extends javax.swing.JFrame {
             //display username problem
             System.out.println("username is already taken");
         }
-    }//GEN-LAST:event_registerButtonActionPerformed
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,7 +195,7 @@ public class RegisterView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField passwordTextField;
-    private javax.swing.JButton registerButton;
+    private javax.swing.JButton submitButton;
     private javax.swing.JComboBox<String> userTypeBox;
     private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
