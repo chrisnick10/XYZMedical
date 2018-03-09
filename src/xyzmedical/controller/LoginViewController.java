@@ -13,8 +13,11 @@ public class LoginViewController {
     
     
     
-    public static void login() {
+    public static String login(String userName, String passWord) {
         
+        String loginQuery = "SELECT userPassword FROM USER WHERE";
+        
+        return "S";
     }
     
 }
