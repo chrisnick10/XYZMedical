@@ -5,6 +5,7 @@
  */
 package xyzmedical.view;
 
+import javax.swing.JOptionPane;
 import xyzmedical.controller.RegisterViewController;
 
 /**
@@ -149,7 +150,7 @@ public class RegisterView extends javax.swing.JFrame {
             nextView.setVisible(true);
         } else {
             //display username problem
-            System.out.println("username is already taken");
+            JOptionPane.showMessageDialog(null, "Username Already Taken");
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
