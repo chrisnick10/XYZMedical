@@ -11,4 +11,10 @@ package xyzmedical.controller;
  */
 public class LoginViewController {
     
+    
+    
+    public static void login() {
+        
+    }
+    
 }

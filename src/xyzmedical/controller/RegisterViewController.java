@@ -11,4 +11,12 @@ package xyzmedical.controller;
  */
 public class RegisterViewController {
     
+    public static boolean register(String userName, String userPassword, char userType) {
+        
+        String usernameQuery = "SELECT userName FROM USER;";
+        
+        System.out.println(userName+" "+userPassword+" "+userType);
+        
+        return true;
+    }
 }
