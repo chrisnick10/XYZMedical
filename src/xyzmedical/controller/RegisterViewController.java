@@ -38,8 +38,9 @@ public class RegisterViewController {
             
             // check list array for matching username and return false if found
             for (String s: userList) {
-                System.out.println(s);
-                if (s == userName) {
+                System.out.println("Found username in database: " + s);
+                if (s.equals(userName)) {
+                    System.out.println("username already found");
                     return false;
                 } else {
                 }
