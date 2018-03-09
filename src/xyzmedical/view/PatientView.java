@@ -16,6 +16,7 @@ public class PatientView extends javax.swing.JFrame {
      */
     public PatientView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
