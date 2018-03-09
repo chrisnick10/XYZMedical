@@ -27,7 +27,6 @@ public class RegisterViewController {
         try {
             // get json result string
             resultString = HttpConnection(usernameQuery);
-            //System.out.println(resultString);
             
             // convert json string to json array and create list array
             JSONArray jsonArr = new JSONArray(resultString);
@@ -38,7 +37,6 @@ public class RegisterViewController {
             
             // check list array for matching username and return false if found
             for (String s: userList) {
-                System.out.println("Found username in database: " + s);
                 if (s.equals(userName)) {
                     System.out.println("username matches");
                     return false;
@@ -49,11 +47,9 @@ public class RegisterViewController {
             // if not found, then insert new data into database and return true
             String insertQuery = "INSERT INTO USER (userID,userName,userPassword,userType) VALUES (NULL,'"+
                 userName+"','"+userPassword+"','"+userType+"');";
-            System.out.println("Testing: "+insertQuery);
-            resultString = HttpConnection(insertQuery);
-            System.out.println("Testing: "+resultString);
-            return true;
             
+            resultString = HttpConnection(insertQuery);
+            return true;
         } catch (Exception ex) {
             Logger.getLogger(RegisterViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
