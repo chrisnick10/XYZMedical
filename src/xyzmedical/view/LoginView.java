@@ -42,14 +42,12 @@ public class LoginView extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(250, 300));
 
-        usernameField.setText("jTextField1");
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameFieldActionPerformed(evt);
             }
         });
 
-        passwordField.setText("jPasswordField1");
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordFieldActionPerformed(evt);
