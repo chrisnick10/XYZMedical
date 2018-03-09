@@ -16,6 +16,7 @@ public class StaffView extends javax.swing.JFrame {
      */
     public StaffView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
