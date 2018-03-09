@@ -149,6 +149,7 @@ public class RegisterView extends javax.swing.JFrame {
             nextView.setVisible(true);
         } else {
             //display username problem
+            System.out.println("username is already taken");
         }
     }//GEN-LAST:event_registerButtonActionPerformed
 

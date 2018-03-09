@@ -22,9 +22,9 @@ public class RegisterViewController {
     public static boolean register(String userName, String userPassword, char userType) {
         
         String usernameQuery = "SELECT userName FROM USER;";
-        String insertQuery = "INSERT INTO USER (userName, userPassword, userType) VALUES ('" +
+        String insertQuery = "INSERT INTO 'USER' ('userName', 'userPassword', 'userType') VALUES ('" +
                 userName+"','"+userPassword+"','"+userType+"');";
-        System.out.println(insertQuery);
+        
         String resultString;
         try {
             resultString = HttpConnection(usernameQuery);
@@ -38,7 +38,8 @@ public class RegisterViewController {
             }
             
             for (String s: userList) {
-                if (s != userName) {
+                if (!s.equals(userName)) {
+                    System.out.println(insertQuery);
                     String insertString = HttpConnection(insertQuery);
                     System.out.println(insertString);
                     return true;
