@@ -20,13 +20,12 @@ public class LoginViewController {
     
     
     
-    public static String login(String userName, String passWord) {
+    public static String login(String userName, String userPassword) {
         
         String userQuery = "SELECT userName FROM USER;";
         String jsonResult;
         
         try {
-            
             jsonResult = HttpConnection(userQuery);
             JSONArray jsonArr = new JSONArray(jsonResult);
             List<String> userList = new ArrayList<String>();
@@ -43,6 +42,25 @@ public class LoginViewController {
             if (!match) {
                 return "NU";
             }
+            
+            String passwordQuery = "SELECT userPassword, userType FROM USER WHERE userName = '" +userName+"';" ;
+            jsonResult = HttpConnection(passwordQuery);
+            jsonArr = new JSONArray(jsonResult);
+            String upass = jsonArr.getJSONObject(0).getString("userPassword");
+            System.out.println("DB user password: "+upass);
+            System.out.println("entered user password: "+userPassword);
+            if (!upass.equals(userPassword)) {
+                System.out.println("password don't match");
+                return "IP";
+            }
+            
+            char userType = jsonArr.getJSONObject(0).getString("userType").charAt(0);
+            if (userType == 'P') {
+                return "P";
+            } else if (userType == 'S') {
+                return "S";
+            }
+            
             
         } catch (Exception ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
