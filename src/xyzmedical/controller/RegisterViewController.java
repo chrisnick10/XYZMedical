@@ -22,31 +22,36 @@ public class RegisterViewController {
     public static boolean register(String userName, String userPassword, char userType) {
         
         String usernameQuery = "SELECT userName FROM USER;";
-        String insertQuery = "INSERT INTO 'USER' ('userName', 'userPassword', 'userType') VALUES ('" +
-                userName+"','"+userPassword+"','"+userType+"');";
-        
         String resultString;
+        
         try {
+            // get json result string
             resultString = HttpConnection(usernameQuery);
             //System.out.println(resultString);
             
-            
+            // convert json string to json array and create list array
             JSONArray jsonArr = new JSONArray(resultString);
             List<String> userList = new ArrayList<String>();
             for (int i = 0; i < jsonArr.length(); i++) {
                 userList.add(jsonArr.getJSONObject(i).getString("userName"));
             }
             
+            // check list array for matching username and return false if found
             for (String s: userList) {
-                if (!s.equals(userName)) {
-                    System.out.println(insertQuery);
-                    String insertString = HttpConnection(insertQuery);
-                    System.out.println(insertString);
-                    return true;
+                System.out.println(s);
+                if (s == userName) {
+                    return false;
+                } else {
                 }
             }
             
-            return false;
+            // if not found, then insert new data into database and return true
+            String insertQuery = "INSERT INTO 'CSI-3370'.'USER' ('userID', 'userName', 'userPassword', 'userType') VALUES (NULL,'" +
+                userName+"','"+userPassword+"','"+userType+"');";
+            System.out.println(insertQuery);
+            resultString = HttpConnection(insertQuery);
+            System.out.println(resultString);
+            return true;
             
         } catch (Exception ex) {
             Logger.getLogger(RegisterViewController.class.getName()).log(Level.SEVERE, null, ex);
