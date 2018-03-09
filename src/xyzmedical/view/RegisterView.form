@@ -107,7 +107,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="usernameTextField">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Enter username..."/>
+            <Property name="text" type="java.lang.String" value="Enter a username..."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">

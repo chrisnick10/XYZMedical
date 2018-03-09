@@ -47,7 +47,7 @@ public class RegisterView extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Register User");
 
-        usernameTextField.setText("Enter username...");
+        usernameTextField.setText("Enter a username...");
 
         jLabel2.setText("Username");
 
