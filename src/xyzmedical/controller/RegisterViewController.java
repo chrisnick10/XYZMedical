@@ -40,18 +40,18 @@ public class RegisterViewController {
             for (String s: userList) {
                 System.out.println("Found username in database: " + s);
                 if (s.equals(userName)) {
-                    System.out.println("username already found");
+                    System.out.println("username matches");
                     return false;
                 } else {
                 }
             }
             
             // if not found, then insert new data into database and return true
-            String insertQuery = "INSERT INTO 'CSI-3370'.'USER' ('userID', 'userName', 'userPassword', 'userType') VALUES (NULL,'" +
+            String insertQuery = "INSERT INTO USER (userID,userName,userPassword,userType) VALUES (NULL,'"+
                 userName+"','"+userPassword+"','"+userType+"');";
-            System.out.println(insertQuery);
+            System.out.println("Testing: "+insertQuery);
             resultString = HttpConnection(insertQuery);
-            System.out.println(resultString);
+            System.out.println("Testing: "+resultString);
             return true;
             
         } catch (Exception ex) {
