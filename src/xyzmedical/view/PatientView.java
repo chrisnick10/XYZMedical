@@ -5,6 +5,7 @@
  */
 package xyzmedical.view;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import xyzmedical.controller.PatientViewController;
 
@@ -23,14 +24,11 @@ public class PatientView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         if(PatientViewController.isNewPatient(U_ID)) {
-            //this.dispose();
-            NewPatientView newPView = new NewPatientView();
-            JOptionPane.showMessageDialog(null, "New Patient; must eneter data");
-            newPView.setVisible(true);
-            
+           
         } else {
             //load patient data into view
             //getPatientInfo(U_ID)
+            enterPatientInfoButton.setVisible(false);
         }
     }
 
@@ -44,30 +42,49 @@ public class PatientView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        enterPatientInfoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Patient");
+
+        enterPatientInfoButton.setText("Enter Patient Information");
+        enterPatientInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterPatientInfoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(jLabel1)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(enterPatientInfoButton))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(enterPatientInfoButton)
+                .addContainerGap(228, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void enterPatientInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPatientInfoButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        NewPatientView newPView = new NewPatientView(U_ID);
+        newPView.setVisible(true);
+    }//GEN-LAST:event_enterPatientInfoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,6 +122,7 @@ public class PatientView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton enterPatientInfoButton;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
