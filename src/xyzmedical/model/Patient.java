@@ -16,7 +16,7 @@ public class Patient {
 
     
     private int P_ID;
-    private String p_lname, p_fname, p_dob, p_email, p_acode, p_phone, p_insurace, p_balance;
+    private String p_lname, p_fname, p_dob, p_email, p_phone, p_insurace, p_balance, p_uid;
     
     public Patient(JSONObject json) throws JSONException {
         
@@ -25,10 +25,10 @@ public class Patient {
         p_fname     =       json.getString("PFNAME");
         p_dob       =       json.getString("DOB");
         p_email     =       json.getString("EMAIL");
-        p_acode     =       json.getString("AREA_CODE");
         p_phone     =       json.getString("PHONE");
         p_insurace  =       json.getString("INSURANCE");
         p_balance   =       json.getString("BALANCE");
+        p_uid       =       json.getString("U_ID");
     }
     
     public int getP_ID() {
@@ -71,14 +71,6 @@ public class Patient {
         this.p_email = p_email;
     }
 
-    public String getP_acode() {
-        return p_acode;
-    }
-
-    public void setP_acode(String p_acode) {
-        this.p_acode = p_acode;
-    }
-
     public String getP_phone() {
         return p_phone;
     }
@@ -101,5 +93,13 @@ public class Patient {
     
     public void setP_balance(String p_balance) {
         this.p_balance = p_balance;
+    }
+    
+    public String getP_uid() {
+        return p_uid;
+    }
+    
+    public void setP_uid(String p_uid) {
+        this.p_uid = p_uid;
     }
 }
