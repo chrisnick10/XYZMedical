@@ -182,6 +182,7 @@ public class AppointmentView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AppointmentView().setVisible(true);
+                AppointmentViewController.getDoctorList();
             }
         });
     }

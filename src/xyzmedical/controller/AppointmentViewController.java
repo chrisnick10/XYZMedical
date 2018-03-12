@@ -65,9 +65,18 @@ public class AppointmentViewController {
     
     public static String[] getDoctorList(){
         
-        String doctorListQuery = "SELECT SLName, SFName FROM STAFF WHERE AccessLevel = 1";
-        String result = "";
-        
+        try {
+            String doctorListQuery = "SELECT SLName, SFName FROM STAFF WHERE AccessLevel = 1";
+            String doctorList = HttpConnection(doctorListQuery);
+            JSONArray jsonArr = new JSONArray(doctorList);
+            System.out.println(doctorList);
+            String[] retList = {};
+            return retList;
+        } catch (Exception ex) {
+            Logger.getLogger(AppointmentViewController.class.getName()).log(Level.SEVERE, null, ex);
+            String[] retList = {};
+            return retList;
+        }
     }
     
 }
