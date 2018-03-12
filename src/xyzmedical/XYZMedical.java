@@ -5,8 +5,6 @@
  */
 package xyzmedical;
 
-import javafx.scene.layout.GridPane;
-import xyzmedical.view.LoginPane;
 import xyzmedical.view.LoginView;
 
 /**
