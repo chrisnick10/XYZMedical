@@ -138,18 +138,19 @@ public class LoginView extends javax.swing.JFrame {
         
         String loginResponse;
         loginResponse = LoginViewController.login(uname, upass);
-        
+        int uid = LoginViewController.getUID(uname);
         switch(loginResponse) {
             case "S":
                 System.out.println("user has logged into staff view");
                 this.dispose();
                 StaffView sView = new StaffView();
+                
                 sView.setVisible(true);
                 break;
             case "P":
                 System.out.println("user has logged into patient view");
                 this.dispose();
-                PatientView pView = new PatientView();
+                PatientView pView = new PatientView(uid);
                 pView.setVisible(true);
                 break;
             case "NU":

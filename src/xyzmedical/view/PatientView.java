@@ -5,18 +5,33 @@
  */
 package xyzmedical.view;
 
+import javax.swing.JOptionPane;
+import xyzmedical.controller.PatientViewController;
+
 /**
  *
  * @author nickolaou
  */
 public class PatientView extends javax.swing.JFrame {
-
+    
+    private static int U_ID;
     /**
      * Creates new form PatientView
      */
-    public PatientView() {
+    public PatientView(int uid) {
+        U_ID = uid;
         initComponents();
         this.setLocationRelativeTo(null);
+        if(PatientViewController.isNewPatient(U_ID)) {
+            //this.dispose();
+            NewPatientView newPView = new NewPatientView();
+            JOptionPane.showMessageDialog(null, "New Patient; must eneter data");
+            newPView.setVisible(true);
+            
+        } else {
+            //load patient data into view
+            //getPatientInfo(U_ID)
+        }
     }
 
     /**
@@ -84,7 +99,7 @@ public class PatientView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PatientView().setVisible(true);
+                new PatientView(U_ID).setVisible(true);
             }
         });
     }
