@@ -60,16 +60,28 @@ public class LoginViewController {
             } else if (userType == 'S') {
                 return "S";
             }
-            
+               
+        } catch (Exception ex) {
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        return "";
+    }
+    
+    public static int getUID(String uname) {
+        int uid = -1;
+        
+        String uidQuery = "SELECT userID FROM USER WHERE userName='"+uname+"';";
+        try {
+            String uidResponse = HttpConnection(uidQuery);
+            JSONArray jsonArr = new JSONArray(uidResponse);
+            uid = jsonArr.getJSONObject(0).getInt("userID");
             
         } catch (Exception ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
-        
-        
-        return "";
+        return uid;
     }
     
 }
