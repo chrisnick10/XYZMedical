@@ -8,6 +8,7 @@ package xyzmedical.view;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import xyzmedical.controller.PatientViewController;
+import xyzmedical.model.Patient;
 
 /**
  *
@@ -23,12 +24,19 @@ public class PatientView extends javax.swing.JFrame {
         U_ID = uid;
         initComponents();
         this.setLocationRelativeTo(null);
+        enterPatientInfoButton.setVisible(false);
         if(PatientViewController.isNewPatient(U_ID)) {
-           
+            enterPatientInfoButton.setVisible(true);
         } else {
             //load patient data into view
-            //getPatientInfo(U_ID)
-            enterPatientInfoButton.setVisible(false);
+            Patient p = PatientViewController.getPatientInformation(U_ID);
+            
+            patientNameLabel.setText("Name: "+p.getP_fname()+" "+p.getP_lname());
+            patientDOBLabel.setText("D.O.B.: "+p.getP_dob());
+            patientEmailLabel.setText("Email: "+p.getP_email());
+            patientPhoneLabel.setText("Phone: "+p.getP_phone());
+            patientInsuranceLabel.setText("Insurance: "+p.getP_insurace());
+            patientBalanceLabel.setText("Account Balance: $"+p.getP_balance());
         }
     }
 
@@ -43,15 +51,77 @@ public class PatientView extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         enterPatientInfoButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        patientNameLabel = new javax.swing.JLabel();
+        patientDOBLabel = new javax.swing.JLabel();
+        patientEmailLabel = new javax.swing.JLabel();
+        patientPhoneLabel = new javax.swing.JLabel();
+        patientInsuranceLabel = new javax.swing.JLabel();
+        patientBalanceLabel = new javax.swing.JLabel();
+        enterPatientInfoButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Patient");
 
         enterPatientInfoButton.setText("Enter Patient Information");
         enterPatientInfoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enterPatientInfoButtonActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Patient Information"));
+
+        patientNameLabel.setText("Name:");
+
+        patientDOBLabel.setText("D.O.B.:");
+
+        patientEmailLabel.setText("Email");
+
+        patientPhoneLabel.setText("Phone:");
+
+        patientInsuranceLabel.setText("Insurance:");
+
+        patientBalanceLabel.setText("Account Balance:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(patientNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(patientDOBLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                    .addComponent(patientEmailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(patientPhoneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(patientInsuranceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(patientBalanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(patientNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patientDOBLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patientEmailLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patientPhoneLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patientInsuranceLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patientBalanceLabel)
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+
+        enterPatientInfoButton1.setText("Pay Balance");
+        enterPatientInfoButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterPatientInfoButton1ActionPerformed(evt);
             }
         });
 
@@ -62,18 +132,25 @@ public class PatientView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(enterPatientInfoButton))
-                .addContainerGap(235, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(enterPatientInfoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(enterPatientInfoButton1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(enterPatientInfoButton)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enterPatientInfoButton)
+                    .addComponent(enterPatientInfoButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -85,6 +162,10 @@ public class PatientView extends javax.swing.JFrame {
         NewPatientView newPView = new NewPatientView(U_ID);
         newPView.setVisible(true);
     }//GEN-LAST:event_enterPatientInfoButtonActionPerformed
+
+    private void enterPatientInfoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPatientInfoButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enterPatientInfoButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,6 +204,14 @@ public class PatientView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enterPatientInfoButton;
+    private javax.swing.JButton enterPatientInfoButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel patientBalanceLabel;
+    private javax.swing.JLabel patientDOBLabel;
+    private javax.swing.JLabel patientEmailLabel;
+    private javax.swing.JLabel patientInsuranceLabel;
+    private javax.swing.JLabel patientNameLabel;
+    private javax.swing.JLabel patientPhoneLabel;
     // End of variables declaration//GEN-END:variables
 }
