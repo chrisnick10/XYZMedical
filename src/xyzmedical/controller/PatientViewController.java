@@ -8,6 +8,7 @@ package xyzmedical.controller;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
+import xyzmedical.model.Patient;
 import static xyzmedical.utilities.HttpConnection.HttpConnection;
 
 /**
@@ -35,5 +36,23 @@ public class PatientViewController {
             Logger.getLogger(PatientViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    
+    public static Patient getPatientInformation(int U_ID) {
+        Patient p = null;
+        
+        String selectQuery = "Select * FROM PATIENT WHERE U_ID="+U_ID+";";
+        try {
+            String resultString = HttpConnection(selectQuery);
+            JSONArray jsonArr = new JSONArray(resultString);
+            p = new Patient(jsonArr.getJSONObject(0));
+        } catch (Exception ex) {
+            Logger.getLogger(PatientViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return p;
+    }
+    
+    public static void payBalance(int U_ID) {
+        
     }
 }
