@@ -5,18 +5,26 @@
  */
 package xyzmedical.view;
 
+import xyzmedical.controller.PatientViewController;
+import xyzmedical.controller.StaffViewController;
+
 /**
  *
  * @author nickolaou
  */
 public class StaffView extends javax.swing.JFrame {
 
+    private static int P_ID;
     /**
      * Creates new form StaffView
      */
-    public StaffView() {
+    public StaffView(int p_id) {
+        P_ID = p_id;
         initComponents();
         this.setLocationRelativeTo(null);
+        enterStaffInfoButton.setVisible(
+                !PatientViewController.isNewPatient(P_ID)
+        );
     }
 
     /**
@@ -31,6 +39,8 @@ public class StaffView extends javax.swing.JFrame {
         staffLabel = new javax.swing.JLabel();
         scheduleButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        restockMed = new javax.swing.JButton();
+        enterStaffInfoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,17 +61,34 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        restockMed.setText("Restock Medication");
+        restockMed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restockMedActionPerformed(evt);
+            }
+        });
+
+        enterStaffInfoButton.setText("Enter Staff Information");
+        enterStaffInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterStaffInfoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(staffLabel)
-                    .addComponent(scheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(restockMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(staffLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(scheduleButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(enterStaffInfoButton))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,7 +99,11 @@ public class StaffView extends javax.swing.JFrame {
                 .addComponent(scheduleButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelButton)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(restockMed)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(enterStaffInfoButton)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pack();
@@ -91,6 +122,18 @@ public class StaffView extends javax.swing.JFrame {
         CancelView cv = new CancelView();
         cv.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void restockMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restockMedActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_restockMedActionPerformed
+
+    private void enterStaffInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterStaffInfoButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        NewStaffView newSView = new NewStaffView(P_ID);
+        newSView.setVisible(true);
+    }//GEN-LAST:event_enterStaffInfoButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,13 +165,15 @@ public class StaffView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffView().setVisible(true);
+                new StaffView(P_ID).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton enterStaffInfoButton;
+    private javax.swing.JButton restockMed;
     private javax.swing.JButton scheduleButton;
     private javax.swing.JLabel staffLabel;
     // End of variables declaration//GEN-END:variables

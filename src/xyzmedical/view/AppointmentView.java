@@ -141,14 +141,14 @@ public class AppointmentView extends javax.swing.JFrame {
         String doctor = doctorTextField.getText();
         String reason = reasonTextField.getText();
         
-        if(AppointmentViewController.schedule(date, doctor, patient, reason)){
+        /*if(AppointmentViewController.schedule(date, doctor, patient, reason)){
             this.dispose();
             StaffView nextView = new StaffView();
             nextView.setVisible(true);
         }
         else{
             JOptionPane.showMessageDialog(null, "This doctor is not available on this date.");
-        }
+        }*/
     }//GEN-LAST:event_submitButtonActionPerformed
 
     /**

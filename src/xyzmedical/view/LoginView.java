@@ -143,7 +143,7 @@ public class LoginView extends javax.swing.JFrame {
             case "S":
                 System.out.println("user has logged into staff view");
                 this.dispose();
-                StaffView sView = new StaffView();
+                StaffView sView = new StaffView(uid);
                 
                 sView.setVisible(true);
                 break;
