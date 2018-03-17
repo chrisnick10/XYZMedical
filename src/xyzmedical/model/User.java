@@ -8,7 +8,7 @@ public class User {
     private String userName;
     private char userType;
 
-    public User(JSONObject jsonObject) {
+    public User(JSONObject jsonObject) throws Exception {
 
         userID      =       jsonObject.getInt("userID");
         userName    =       jsonObject.getString("userName");

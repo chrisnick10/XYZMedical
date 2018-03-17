@@ -7,7 +7,7 @@ public class Staff {
     private int s_id;
     private String last_name, first_name, accessLevel, date_hire;
 
-    public Staff(JSONObject jsonObject) {
+    public Staff(JSONObject jsonObject) throws Exception {
         s_id        =       jsonObject.getInt("S_ID");
         last_name   =       jsonObject.getString("SLName");
         first_name  =       jsonObject.getString("SFName");

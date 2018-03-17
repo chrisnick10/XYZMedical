@@ -7,7 +7,7 @@ public class Prescriptions {
     private int rx_id, v_id;
     private String dosage, dosageUnit;
 
-    public Prescriptions(JSONObject jsonObject) {
+    public Prescriptions(JSONObject jsonObject) throws Exception {
 
         rx_id       =       jsonObject.getInt("RxID");
         v_id        =       jsonObject.getInt("V_ID");
