@@ -22,8 +22,8 @@ import xyzmedical.db.Database;
  */
 public class LoginViewController {
     public static int login(String userName, String userPassword) {
-        ArrayList<Staff> staffList = Database.searchStaff("USERNAME", Util.sqlStringValue(userName));
-        ArrayList<Patient> patientList = Database.searchPatients("USERNAME", Util.sqlStringValue(userName));
+        ArrayList<Staff> staffList = Database.searchStaff("USERNAME", userName);
+        ArrayList<Patient> patientList = Database.searchPatients("USERNAME", userName);
 
         if (staffList.size() == 0 && patientList.size() == 0) {
             return -1;
@@ -44,14 +44,14 @@ public class LoginViewController {
     }
     
     public static int getUID(String uname) {
-        ArrayList<Staff> staffList = Database.searchStaff("USERNAME", Util.sqlStringValue(uname));
+        ArrayList<Staff> staffList = Database.searchStaff("USERNAME", uname);
         for (Staff staffMember : staffList) {
             if (staffMember.getUsername().equals(uname)) {
                 return staffMember.getID();
             }
         }
         
-        ArrayList<Patient> patientList = Database.searchPatients("USERNAME", Util.sqlStringValue(uname));
+        ArrayList<Patient> patientList = Database.searchPatients("USERNAME", uname);
         for (Patient patient : patientList) {
             if (patient.getUsername().equals(uname)) {
                 return patient.getID();

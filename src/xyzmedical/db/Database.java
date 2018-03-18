@@ -51,7 +51,7 @@ public class Database {
             JSONArray jsonArr = new JSONArray(doQuery(query));
             for (int i = 0; i < jsonArr.length(); ++i) {
                 JSONObject obj = jsonArr.getJSONObject(i);
-                Date apptTime = Util.strToDate(obj.getString("DATE"));
+                Date apptTime = Util.jDate(obj.getString("DATE"));
                 if (apptTime != null) {
                     Appointment appt = new Appointment(obj.getInt("V_ID"),
                             obj.getInt("S_ID"),
@@ -74,7 +74,7 @@ public class Database {
             JSONArray jsonArr = new JSONArray(doQuery(query));
             for (int i = 0; i < jsonArr.length(); ++i) {
                 JSONObject obj = jsonArr.getJSONObject(i);
-                Date dob = Util.strToDate(obj.getString("DOB"));
+                Date dob = Util.jDate(obj.getString("DOB"));
                 if (dob != null) {
                     Patient patient = new Patient(obj.getInt("P_ID"),
                             obj.getString("PFNAME"),
@@ -122,7 +122,7 @@ public class Database {
             JSONArray jsonArr = new JSONArray(doQuery(query));
             for (int i = 0; i < jsonArr.length(); ++i) {
                 JSONObject obj = jsonArr.getJSONObject(i);
-                Date hireDate = Util.strToDate(obj.getString("DOH"));
+                Date hireDate = Util.jDate(obj.getString("DOH"));
                 if (hireDate != null) {
                     Staff staff = new Staff(obj.getInt("S_ID"),
                             obj.getString("SFName"),
@@ -140,83 +140,83 @@ public class Database {
         return staffList;
     }
     
-    private static ArrayList<User> userQuery(String query) {
-        ArrayList<User> userList = new ArrayList<>();
-        try {
-            JSONArray jsonArr = new JSONArray(doQuery(query));
-            for (int i = 0; i < jsonArr.length(); ++i) {
-                JSONObject obj = jsonArr.getJSONObject(i);
-                User user = new User(obj.getInt("userID"), 
-                        obj.getInt("accessLevel"),
-                        obj.getString("userName"),
-                        obj.getString("userPassword"));
-                userList.add(user);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return userList;
-    }
-    
     public static ArrayList<Appointment> allAppointments() {
         return apptQuery("SELECT * FROM APPOINTMENTS;");
     }
     
+    public static ArrayList<Appointment> searchAppointments(String key, int value) {
+        return apptQuery("SELECT * FROM PATIENT WHERE " + key + "=" + Util.sqlValue(value) + ";");
+    }
+    
     public static ArrayList<Appointment> searchAppointments(String key, String value) {
-        return apptQuery("SELECT * FROM PATIENT WHERE " + key + "=" + value + ";");
+        return apptQuery("SELECT * FROM PATIENT WHERE " + key + "=" + Util.sqlValue(value) + ";");
     }
     
     public static ArrayList<Patient> allPatients() {
         return patientQuery("SELECT * FROM PATIENT;");
     }
     
+    public static ArrayList<Patient> searchPatients(String key, int value) {
+        return patientQuery("SELECT * FROM PATIENT WHERE " + key + "=" + Util.sqlValue(value) + ";");
+    }
+    
     public static ArrayList<Patient> searchPatients(String key, String value) {
-        return patientQuery("SELECT * FROM PATIENT WHERE " + key + "=" + value + ";");
+        return patientQuery("SELECT * FROM PATIENT WHERE " + key + "=" + Util.sqlValue(value) + ";");
     }
     
     public static ArrayList<Medication> allPrescriptions() {
         return rxQuery("SELECT * FROM PRESCRIPTIONS;");
     }
     
+    public static ArrayList<Medication> searchPrescriptions(String key, int value) {
+        return rxQuery("SELECT * FROM PRESCRIPTIONS WHERE " + key + "=" + Util.sqlValue(value) + ";");
+    }
+    
     public static ArrayList<Medication> searchPrescriptions(String key, String value) {
-        return rxQuery("SELECT * FROM PRESCRIPTIONS WHERE " + key + "=" + value + ";");
+        return rxQuery("SELECT * FROM PRESCRIPTIONS WHERE " + key + "=" + Util.sqlValue(value) + ";");
     }
     
     public static ArrayList<Staff> allStaff() {
         return staffQuery("SELECT * FROM STAFF;");
     }
     
+    public static ArrayList<Staff> searchStaff(String key, int value) {
+        return staffQuery("SELECT * FROM STAFF WHERE " + key + "=" + Util.sqlValue(value) + ";");
+    }
+    
     public static ArrayList<Staff> searchStaff(String key, String value) {
-        return staffQuery("SELECT * FROM STAFF WHERE " + key + "=" + value + ";");
+        return staffQuery("SELECT * FROM STAFF WHERE " + key + "=" + Util.sqlValue(value) + ";");
     }
-    
-    public static ArrayList<User> allUsers() {
-        return userQuery("SELECT * FROM USER;");
-    }
-    
-    public static ArrayList<User> searchUsers(String key, String value) {
-        return userQuery("SELECT * FROM STAFF WHERE " + key + "=" + value + ";");
-    }
-    
-    // Returns 0 if not good, 1 if patient, and 0 if staff
-    public static int isPasswordGood(String username, String password) {
-        int userType = 0;
-        try {
-            JSONArray jsonArr = new JSONArray(doQuery("SELECT * FROM USER WHERE userName=" + Util.sqlStringValue(password) + ";"));
-            if (jsonArr.length() == 1) {
-                JSONObject obj = jsonArr.getJSONObject(0);
-                if (obj.getString("userPassword").equals(password)) {
-                    String userTypeStr = obj.getString("userType");
-                    if (userTypeStr.equals("P")) {
-                        userType = 1;
-                    } else if (userTypeStr.equals("S")) {
-                        userType = 2;
-                    }
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+    public static boolean patientExists(Patient patient) {
+        String searchQuery = "SELECT * FROM `PATIENT` WHERE `P_ID` = ";
+        searchQuery += Util.sqlValue(patient.getID()) + " ORDER BY `P_ID` ASC";
+        String searchResult = doQuery(searchQuery);
+        if (searchResult.equals("[]")) {
+            return false;
         }
-        return userType;
+        return true;
+    }
+    
+    public static boolean insertPatient(Patient patient) {
+        if (patientExists(patient)) {
+            return false;
+        }
+        String insertStmt = "INSERT INTO `PATIENT`";
+        insertStmt += "(`P_ID`, `PLNAME`, `PFNAME`, `DOB`, `EMAIL`, `PHONE`, `INSURANCE`, `BALANCE`, `U_ID`, `USERNAME`, `PASSWORD`)";
+        insertStmt += " VALUES (";
+        insertStmt += Util.sqlValue(patient.getID()) + ", ";
+        insertStmt += Util.sqlValue(patient.getLastName()) + ", ";
+        insertStmt += Util.sqlValue(patient.getFirstName()) + ", ";
+        insertStmt += Util.sqlValue(patient.getBirthDate()) + ", ";
+        insertStmt += Util.sqlValue(patient.getEmail()) + ", ";
+        insertStmt += Util.sqlValue(patient.getPhoneNum()) + ", ";
+        insertStmt += Util.sqlValue(patient.getInsurance()) + ", ";
+        insertStmt += Util.sqlValue(patient.getBalance()) + ", ";
+        insertStmt += Util.sqlValue(17) + ", ";
+        insertStmt += Util.sqlValue(patient.getUsername()) + ", ";
+        insertStmt += Util.sqlValue(patient.getPassword()) + ");";
+        doQuery(insertStmt);
+        return true;
     }
 }

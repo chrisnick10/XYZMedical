@@ -32,7 +32,7 @@ public class PatientView extends javax.swing.JFrame {
             Patient p = PatientViewController.getPatientInformation(U_ID);
             
             patientNameLabel.setText("Name: " + p.getFirstName() + " " + p.getLastName());
-            patientDOBLabel.setText("D.O.B.: " + p.getBirthDate().toString());
+            patientDOBLabel.setText("D.O.B.: " + p.getBirthDate());
             patientEmailLabel.setText("Email: " + p.getEmail());
             patientPhoneLabel.setText("Phone: " + p.getPhoneNum());
             patientInsuranceLabel.setText("Insurance: " + p.getInsurance());

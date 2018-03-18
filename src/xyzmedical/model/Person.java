@@ -40,6 +40,10 @@ public abstract class Person extends Object {
         return username;
     }
     
+    public String getPassword() {
+        return password;
+    }
+    
     public boolean passwordMatches(String password) {
         return password.equals(this.password);
     }

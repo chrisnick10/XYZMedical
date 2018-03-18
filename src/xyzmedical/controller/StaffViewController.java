@@ -22,7 +22,7 @@ public class StaffViewController {
     
     
     public static boolean isNewStaff(int U_ID) {
-        ArrayList<Staff> staffList = Database.searchStaff("S_ID", String.valueOf(U_ID));
+        ArrayList<Staff> staffList = Database.searchStaff("S_ID", U_ID);
         if (staffList.size() == 0) {
             return true;
         }
@@ -31,7 +31,7 @@ public class StaffViewController {
     
     public static Staff getStaffInformation(int U_ID) {
         Staff staffMember = null;
-        ArrayList<Staff> staffList = Database.searchStaff("S_ID", String.valueOf(U_ID));
+        ArrayList<Staff> staffList = Database.searchStaff("S_ID", U_ID);
         if (staffList.size() > 0) {
             staffMember = staffList.get(0);
         }

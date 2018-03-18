@@ -21,7 +21,7 @@ import xyzmedical.db.Database;
 public class PatientViewController {
     
     public static boolean isNewPatient(int U_ID) {
-        ArrayList<Patient> patients = Database.searchPatients("P_ID", String.valueOf(U_ID));
+        ArrayList<Patient> patients = Database.searchPatients("P_ID", U_ID);
         if (patients.size() == 0) {
             return true;
         }
@@ -30,7 +30,7 @@ public class PatientViewController {
     
     public static Patient getPatientInformation(int U_ID) {
         Patient p = null;
-        ArrayList<Patient> patients = Database.searchPatients("P_ID", String.valueOf(U_ID));
+        ArrayList<Patient> patients = Database.searchPatients("P_ID", U_ID);
         if (patients.size() > 0) {
             p = patients.get(0);
         }

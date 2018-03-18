@@ -1,6 +1,7 @@
 package xyzmedical.model;
 
 import java.util.Date;
+import xyzmedical.util.Util;
 
 /**
  *
@@ -40,8 +41,8 @@ public class Patient extends Person {
         return insurance;
     }
     
-    public Date getBirthDate() {
-        return birthDate;
+    public String getBirthDate() {
+        return Util.sqlValue(birthDate);
     }
     
     public boolean setBalance(double balance) {
