@@ -31,12 +31,12 @@ public class PatientView extends javax.swing.JFrame {
             //load patient data into view
             Patient p = PatientViewController.getPatientInformation(U_ID);
             
-            patientNameLabel.setText("Name: "+p.getP_fname()+" "+p.getP_lname());
-            patientDOBLabel.setText("D.O.B.: "+p.getP_dob());
-            patientEmailLabel.setText("Email: "+p.getP_email());
-            patientPhoneLabel.setText("Phone: "+p.getP_phone());
-            patientInsuranceLabel.setText("Insurance: "+p.getP_insurace());
-            patientBalanceLabel.setText("Account Balance: $"+p.getP_balance());
+            patientNameLabel.setText("Name: " + p.getFirstName() + " " + p.getLastName());
+            patientDOBLabel.setText("D.O.B.: " + p.getBirthDate().toString());
+            patientEmailLabel.setText("Email: " + p.getEmail());
+            patientPhoneLabel.setText("Phone: " + p.getPhoneNum());
+            patientInsuranceLabel.setText("Insurance: " + p.getInsurance());
+            patientBalanceLabel.setText("Account Balance: $" + String.valueOf(p.getBalance()));
         }
     }
 

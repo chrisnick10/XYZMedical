@@ -1,77 +1,81 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xyzmedical.model;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.Date;
 
 /**
  *
  * @author Will
  */
 public class Appointment {
-
-    private int v_id, s_id, p_id;
-    private String reason, date, summary;
-
-    public Appointment(JSONObject json) throws JSONException {
-        this.v_id       =       json.getInt("V_ID");
-        this.s_id       =       json.getInt("S_ID");
-        this.p_id       =       json.getInt("P_ID");
-        this.reason     =       json.getString("REASON");
-        this.date       =       json.getString("DATE");
-        this.summary    =       json.getString("SUMMARY");
+    protected int ID;
+    protected int staffID;
+    protected int patientID;
+    protected String reason;
+    protected String summary;
+    protected Date apptTime;
+    
+    public Appointment(int ID, int staffID, int patientID, String reason, String summary, Date apptTime) {
+        this.ID = ID;
+        this.staffID = staffID;
+        this.patientID = patientID;
+        this.reason = reason;
+        this.summary = summary;
+        this.apptTime = apptTime;
     }
-
-    public int getV_id() {
-        return v_id;
+    
+    @Override
+    public String toString() {
+        String idStr = "[" + String.valueOf(this.ID) + "]";
+        String staffIdStr = "Staff:[" + String.valueOf(this.staffID) + "]";
+        String patientIdStr = "Patient:[" + String.valueOf(this.patientID) + "]";
+        return idStr + " " + staffIdStr + " " + patientIdStr;
     }
-
-    public void setV_id(int v_id) {
-        this.v_id = v_id;
+    
+    public int getID() {
+        return ID;
     }
-
-    public int getS_id() {
-        return s_id;
+    
+    public int getStaffID() {
+        return staffID;
     }
-
-    public void setS_id(int s_id) {
-        this.s_id = s_id;
+    
+    public int getPatientID() {
+        return patientID;
     }
-
-    public int getP_id() {
-        return p_id;
-    }
-
-    public void setP_id(int p_id) {
-        this.p_id = p_id;
-    }
-
+    
     public String getReason() {
         return reason;
     }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
+    
     public String getSummary() {
         return summary;
     }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
+    
+    public Date getTime() {
+        return apptTime;
     }
-
+    
+    public boolean setReason(String reason) {
+        if (reason != null) {
+            this.reason = reason;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean setSummary(String summary) {
+        if (summary != null) {
+            this.summary = summary;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean setTime(Date apptTime) {
+        if (apptTime != null) {
+            this.apptTime = apptTime;
+            return true;
+        }
+        return false;
+    }
 }

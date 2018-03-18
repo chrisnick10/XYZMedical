@@ -1,41 +1,31 @@
 package xyzmedical.model;
 
-import org.json.JSONObject;
-
 public class User {
-
-    private int userID;
-    private String userName;
-    private char userType;
-
-    public User(JSONObject jsonObject) throws Exception {
-
-        userID      =       jsonObject.getInt("userID");
-        userName    =       jsonObject.getString("userName");
-        userType    = (char)jsonObject.get("userType");
+    protected int ID;
+    protected int accessLevel;
+    protected String username;
+    protected String password;
+    
+    public User(int ID, int accessLevel, String username, String password) {
+            this.ID = ID;
+            this.accessLevel = accessLevel;
+            this.username = username;
+            this.password = password;
     }
-
-    public int getUserID() {
-        return userID;
+    
+    public int getID() {
+        return ID;
     }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
+    
+    public int getAccessLevel() {
+        return accessLevel;
     }
-
-    public String getUserName() {
-        return userName;
+    
+    public String getUsername() {
+        return username;
     }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public char getUserType() {
-        return userType;
-    }
-
-    public void setUserType(char userType) {
-        this.userType = userType;
+    
+    public String getPassword() {
+        return password;
     }
 }

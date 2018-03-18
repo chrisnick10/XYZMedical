@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.lang.Integer;
 import org.json.JSONArray;
-import static xyzmedical.utilities.HttpConnection.HttpConnection;
+import static xyzmedical.util.HttpConnection.HttpConnection;
 
 /**
  *

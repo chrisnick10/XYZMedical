@@ -5,11 +5,14 @@
  */
 package xyzmedical.controller;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
 import xyzmedical.model.Patient;
-import static xyzmedical.utilities.HttpConnection.HttpConnection;
+import static xyzmedical.util.HttpConnection.HttpConnection;
+
+import xyzmedical.db.Database;
 
 /**
  *
@@ -18,36 +21,18 @@ import static xyzmedical.utilities.HttpConnection.HttpConnection;
 public class PatientViewController {
     
     public static boolean isNewPatient(int U_ID) {
-        
-        String uidQuery = "SELECT * FROM PATIENT WHERE U_ID = "+U_ID+";";
-        try {
-            String resultJSON = HttpConnection(uidQuery);
-            JSONArray jsonArr = new JSONArray(resultJSON);
-            
-            if (jsonArr.length() > 0) {
-                System.out.println("not new patient");
-                return false;
-            } else {
-                System.out.println("new patient. need info.");
-                return true;
-            }
-            
-        } catch (Exception ex) {
-            Logger.getLogger(PatientViewController.class.getName()).log(Level.SEVERE, null, ex);
+        ArrayList<Patient> patients = Database.searchPatients("P_ID", String.valueOf(U_ID));
+        if (patients.size() == 0) {
+            return true;
         }
         return false;
     }
     
     public static Patient getPatientInformation(int U_ID) {
         Patient p = null;
-        
-        String selectQuery = "Select * FROM PATIENT WHERE U_ID="+U_ID+";";
-        try {
-            String resultString = HttpConnection(selectQuery);
-            JSONArray jsonArr = new JSONArray(resultString);
-            p = new Patient(jsonArr.getJSONObject(0));
-        } catch (Exception ex) {
-            Logger.getLogger(PatientViewController.class.getName()).log(Level.SEVERE, null, ex);
+        ArrayList<Patient> patients = Database.searchPatients("P_ID", String.valueOf(U_ID));
+        if (patients.size() > 0) {
+            p = patients.get(0);
         }
         return p;
     }

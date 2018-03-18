@@ -10,78 +10,53 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
-import static xyzmedical.utilities.HttpConnection.HttpConnection;
+import static xyzmedical.util.HttpConnection.HttpConnection;
 
+import xyzmedical.model.Staff;
+import xyzmedical.model.Patient;
+import xyzmedical.util.Util;
+import xyzmedical.db.Database;
 /**
  *
  * @author christian
  */
 public class LoginViewController {
-    
-    
-    
-    public static String login(String userName, String userPassword) {
+    public static int login(String userName, String userPassword) {
+        ArrayList<Staff> staffList = Database.searchStaff("USERNAME", Util.sqlStringValue(userName));
+        ArrayList<Patient> patientList = Database.searchPatients("USERNAME", Util.sqlStringValue(userName));
+
+        if (staffList.size() == 0 && patientList.size() == 0) {
+            return -1;
+        }
         
-        String userQuery = "SELECT userName FROM USER;";
-        String jsonResult;
+        for (Staff staffMember : staffList) {
+            if (staffMember.passwordMatches(userPassword)) {
+                return staffMember.getAccessLevel();
+            }
+        }
         
-        try {
-            jsonResult = HttpConnection(userQuery);
-            JSONArray jsonArr = new JSONArray(jsonResult);
-            List<String> userList = new ArrayList<String>();
-            for (int i = 0; i < jsonArr.length(); i++) {
-                userList.add(jsonArr.getJSONObject(i).getString("userName"));
+        for (Patient patient : patientList) {
+            if (patient.passwordMatches(userPassword)) {
+                return 0;
             }
-            
-            boolean match = false;
-            for (String user: userList) {
-                if (user.equals(userName)) {
-                    match = true;
-                }
-            }
-            if (!match) {
-                return "NU";
-            }
-            
-            String passwordQuery = "SELECT userPassword, userType FROM USER WHERE userName = '" +userName+"';" ;
-            jsonResult = HttpConnection(passwordQuery);
-            jsonArr = new JSONArray(jsonResult);
-            String upass = jsonArr.getJSONObject(0).getString("userPassword");
-            System.out.println("DB user password: "+upass);
-            System.out.println("entered user password: "+userPassword);
-            if (!upass.equals(userPassword)) {
-                System.out.println("password don't match");
-                return "IP";
-            }
-            
-            char userType = jsonArr.getJSONObject(0).getString("userType").charAt(0);
-            if (userType == 'P') {
-                return "P";
-            } else if (userType == 'S') {
-                return "S";
-            }
-               
-        } catch (Exception ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }    
-        return "";
+        }
+        return 88;
     }
     
     public static int getUID(String uname) {
-        int uid = -1;
-        
-        String uidQuery = "SELECT userID FROM USER WHERE userName='"+uname+"';";
-        try {
-            String uidResponse = HttpConnection(uidQuery);
-            JSONArray jsonArr = new JSONArray(uidResponse);
-            uid = jsonArr.getJSONObject(0).getInt("userID");
-            
-        } catch (Exception ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+        ArrayList<Staff> staffList = Database.searchStaff("USERNAME", Util.sqlStringValue(uname));
+        for (Staff staffMember : staffList) {
+            if (staffMember.getUsername().equals(uname)) {
+                return staffMember.getID();
+            }
         }
         
-        
-        return uid;
+        ArrayList<Patient> patientList = Database.searchPatients("USERNAME", Util.sqlStringValue(uname));
+        for (Patient patient : patientList) {
+            if (patient.getUsername().equals(uname)) {
+                return patient.getID();
+            }
+        }
+        return -1;
     }
-    
 }

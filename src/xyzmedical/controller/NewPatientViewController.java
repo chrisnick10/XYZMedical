@@ -7,7 +7,7 @@ package xyzmedical.controller;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static xyzmedical.utilities.HttpConnection.HttpConnection;
+import static xyzmedical.util.HttpConnection.HttpConnection;
 
 /**
  *

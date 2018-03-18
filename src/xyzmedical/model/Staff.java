@@ -1,57 +1,26 @@
 package xyzmedical.model;
 
-import org.json.JSONObject;
+import java.util.Date;
 
-public class Staff {
-
-    private int s_id;
-    private String last_name, first_name, accessLevel, date_hire;
-
-    public Staff(JSONObject jsonObject) throws Exception {
-        s_id        =       jsonObject.getInt("S_ID");
-        last_name   =       jsonObject.getString("SLName");
-        first_name  =       jsonObject.getString("SFName");
-        accessLevel =       jsonObject.getString("AccessLevel");
-        date_hire   =       jsonObject.getString("DOH");
+/**
+ *
+ * @author Will
+ */
+public class Staff extends Person {
+    protected int access;
+    protected Date hireDate;
+    
+    public Staff(int ID, String fName, String lName, String username, String password, int accessLvl, Date hireDate) {
+        super(ID, fName, lName, username, password);
+        this.access = accessLvl;
+        this.hireDate = hireDate;
     }
-
-    public int getS_id() {
-        return s_id;
+    
+    public int getAccessLevel() {
+        return access;
     }
-
-    public void setS_id(int s_id) {
-        this.s_id = s_id;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getAccessLevel() {
-        return accessLevel;
-    }
-
-    public void setAccessLevel(String accessLevel) {
-        this.accessLevel = accessLevel;
-    }
-
-    public String getDate_hire() {
-        return date_hire;
-    }
-
-    public void setDate_hire(String date_hire) {
-        this.date_hire = date_hire;
+    
+    public Date getHireDate() {
+        return hireDate;
     }
 }

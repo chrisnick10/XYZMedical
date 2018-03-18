@@ -1,4 +1,4 @@
-package xyzmedical.utilities;
+package xyzmedical.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

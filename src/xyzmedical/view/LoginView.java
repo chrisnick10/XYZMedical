@@ -135,35 +135,25 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
         String uname = usernameTextField.getText();
         String upass = passwordTextField.getText();
-        
-        String loginResponse;
-        loginResponse = LoginViewController.login(uname, upass);
+
+        int loginResponse = LoginViewController.login(uname, upass);
         int uid = LoginViewController.getUID(uname);
         switch(loginResponse) {
-            case "S":
-                System.out.println("user has logged into staff view");
+            case 1: case 2: case 3: case4:
+                System.out.println("Staff member has logged on");
                 this.dispose();
                 StaffView sView = new StaffView(uid);
-                
                 sView.setVisible(true);
                 break;
-            case "P":
-                System.out.println("user has logged into patient view");
+            case 0:
+                System.out.println("Patient has logged on");
                 this.dispose();
                 PatientView pView = new PatientView(uid);
                 pView.setVisible(true);
                 break;
-            case "NU":
-                System.out.println("username does not exist in system");
-                JOptionPane.showMessageDialog(null, "Username Does Not Exist. Please Register.");
-                break;
-            case "IP":
-                System.out.println("invalid password entered by user");
-                JOptionPane.showMessageDialog(null, "Invalid Username/Password");
-                break;
             default:
-                System.out.println("user has not logged in");
-                JOptionPane.showMessageDialog(null, "User has not logged in");
+                System.out.println("Invalid username or password");
+                JOptionPane.showMessageDialog(null, "Invalid username or password");
         };
         
         
