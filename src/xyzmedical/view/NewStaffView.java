@@ -7,7 +7,6 @@ package xyzmedical.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import xyzmedical.controller.NewPatientViewController;
 import xyzmedical.controller.NewStaffViewController;
 
 /**
@@ -195,10 +194,10 @@ public class NewStaffView extends javax.swing.JFrame {
         // TODO add your handling code here:
         String fName = fnameTextField.getText();
         String lName = lnameTextField.getText();
-        String dob = yearTextField.getText()+"-"+monthTextField.getText()+"-"+dayTextField.getText();
+        String doh = yearTextField.getText()+"-"+monthTextField.getText()+"-"+dayTextField.getText();
         
-        NewStaffViewController.insertNewPatient(fName,lName,dob, staff_type.getSelectedIndex() + 1,S_ID);
-
+        NewStaffViewController.insertNewStaff(fName, lName, doh, staff_type.getSelectedIndex() + 1, S_ID);
+        
         this.dispose();
         StaffView pView = new StaffView(S_ID);
         pView.setVisible(true);
