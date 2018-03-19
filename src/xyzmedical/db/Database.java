@@ -142,18 +142,18 @@ public class Database {
     
     
     // SEARCH METHODS FOR EQUALITY CONDITIONS
-    public static ArrayList<Appointment> allAppointments() {
+    public static ArrayList<Appointment> allAppts() {
         SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("APPTS");
         return apptQuery(stmtBuilder.generateStmt());
     }
     
-    public static ArrayList<Appointment> searchAppointments(String key, int value) {
+    public static ArrayList<Appointment> searchAppts(String key, int value) {
         SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("APPTS");
         stmtBuilder.add(key, value);
         return apptQuery(stmtBuilder.generateStmt());
     }
     
-    public static ArrayList<Appointment> searchAppointments(String key, String value) {
+    public static ArrayList<Appointment> searchAppts(String key, String value) {
         SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("APPTS");
         stmtBuilder.add(key, value);
         return apptQuery(stmtBuilder.generateStmt());
@@ -392,12 +392,28 @@ public class Database {
     
     
     // DELETE METHODS
+    public static void deleteAppt(String key, String value) {
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("APPT");
+        stmtBuilder.add(key, value);
+        execQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static void deleteAppt(String key, int value) {
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("APPT");
+        stmtBuilder.add(key, value);
+        execQuery(stmtBuilder.generateStmt());
+    }
+    
     public static boolean deleteAppt(int apptID) {
         if (!appointmentExists(apptID)) {
             return false;
         }
-        
+        deleteAppt("ID", apptID);
         return true;
+    }
+    
+    public static boolean deleteAppt(Appointment appt) {
+        return deleteAppt(appt.getID());
     }
     
     public static boolean deletePatient(int patientID) {
@@ -407,18 +423,43 @@ public class Database {
         return true;
     }
     
+    public static void deleteMedInfo(String key, String value) {
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("MED_INFO");
+        stmtBuilder.add(key, value);
+        execQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static void deleteMedInfo(String key, int value) {
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("MED_INFO");
+        stmtBuilder.add(key, value);
+        execQuery(stmtBuilder.generateStmt());
+    }
+    
     public static boolean deleteMedInfo(int medID) {
         if (!medInfoExists(medID)) {
             return false;
         }
+        deleteMedInfo("ID", medID);
         return true;
+    }
+    
+    public static boolean deleteMedInfo(MedInfo medInfo) {
+        return deleteMedInfo(medInfo.getID());
     }
     
     public static boolean deletePrescription(int apptID, int patientID) {
         if (!prescriptionExists(apptID, patientID)) {
             return false;
         }
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("PRESCRIPT");
+        stmtBuilder.add("APPT_ID", apptID);
+        stmtBuilder.add("PATIENT_ID", patientID);
+        execQuery(stmtBuilder.generateStmt());
         return true;
+    }
+    
+    public static boolean deletePrescription(Prescription p) {
+        return deletePrescription(p.getAppointmentID(), p.getPatientID());
     }
     
     public static void deleteStaff(String key, String value) {
