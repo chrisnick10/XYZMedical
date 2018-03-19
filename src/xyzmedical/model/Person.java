@@ -11,7 +11,8 @@ public abstract class Person extends Object {
     protected String username;
     protected String password;
     
-    public Person(int ID, String firstName, String lastName, String username, String password) {
+    public Person(int ID, String firstName, String lastName, String username, 
+                String password) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,33 +20,33 @@ public abstract class Person extends Object {
         this.password = password;
     }
     
-    @Override
-    public String toString() {
-        return "[" + this.ID + "] " + this.lastName + ", " + this.firstName;
-    }
-    
     public int getID() {
-        return ID;
+        return this.ID;
     }
     
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
     
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
     
     public String getUsername() {
-        return username;
+        return this.username;
     }
     
     public String getPassword() {
-        return password;
+        return this.password;
     }
     
     public boolean passwordMatches(String password) {
-        return password.equals(this.password);
+        return this.password.equals(this.password);
+    }
+    
+    @Override
+    public String toString() {
+        return "[" + this.ID + "] " + this.lastName + ", " + this.firstName;
     }
 }
  

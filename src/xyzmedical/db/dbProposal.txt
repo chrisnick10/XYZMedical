@@ -1,0 +1,57 @@
+APPT
+----
+ID              unique unsigned int AI
+STAFF_ID        unsigned int
+PATIENT_ID      unsigned int
+REASON          varchar(256)
+SUMMARY         varchar(1024)
+TIME            datetime
+
+PATIENT_TABLE
+-------------
+ID              unique unsigned int AI
+PCP             unsigned int NULLABLE
+USERNAME        varchar(20)
+PASSWORD        varchar(20)
+FIRSTNAME       varchar(20)
+LASTNAME        varchar(20)
+EMAIL           varchar(20) NULLABLE
+MAINPHONE       varchar(12) NULLABLE
+INSURANCE       varchar(12) NULLABLE
+BALANCE         float
+BIRTH_DATE      date
+
+MED_INFO
+--------
+ID              unique unsigned int AI
+NAME            varchar(50)
+USAGE           varchar(256)
+DESCRIPTION     varchar(256) NULLABLE
+SIDE_EFFECTS    varchar(256) NULLABLE
+
+PRESCRIPT
+---------
+APPT_ID         unsigned int NULLABLE
+MED_ID          unsigned int
+STAFF_ID        unsigned int
+PATIENT_ID      unsigned int
+DOSES           unsigned int
+DOSE_AMNT       unsigned int
+DOSE_UNIT       varchar(5)
+FREQ_AMNT       int
+FREQ_UNIT       varchar(5)
+REFILLS         int
+DATE            date
+
+STAFF_TABLE
+-----------
+ID              unique unsigned int AI
+ACCESSLVL       int
+USERNAME        varchar(20)
+PASSWORD        varchar(20)
+FIRSTNAME       varchar(20)
+LASTNAME        varchar(20)
+BIRTH_DATE      date NULLABLE
+HIRE_DATE       date NULLABLE
+
+

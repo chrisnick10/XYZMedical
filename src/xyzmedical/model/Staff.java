@@ -1,26 +1,34 @@
 package xyzmedical.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author Will
  */
 public class Staff extends Person {
-    protected int access;
-    protected Date hireDate;
+    private int access;
+    private Date birthDate;
+    private Date hireDate;
     
-    public Staff(int ID, String fName, String lName, String username, String password, int accessLvl, Date hireDate) {
-        super(ID, fName, lName, username, password);
-        this.access = accessLvl;
+    public Staff(int ID, int accessLevel, String firstName, String lastName, 
+                String username, String password, Date birthDate, 
+                Date hireDate) {
+        super(ID, firstName, lastName, username, password);
+        this.access = accessLevel;
+        this.birthDate = birthDate;
         this.hireDate = hireDate;
     }
     
     public int getAccessLevel() {
-        return access;
+        return this.access;
+    }
+    
+    public Date getBirthDate() {
+        return this.birthDate;
     }
     
     public Date getHireDate() {
-        return hireDate;
+        return this.hireDate;
     }
 }

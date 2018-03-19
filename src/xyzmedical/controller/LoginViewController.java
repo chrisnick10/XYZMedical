@@ -14,7 +14,7 @@ import static xyzmedical.util.HttpConnection.HttpConnection;
 
 import xyzmedical.model.Staff;
 import xyzmedical.model.Patient;
-import xyzmedical.util.Util;
+import xyzmedical.db.Util;
 import xyzmedical.db.Database;
 /**
  *

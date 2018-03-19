@@ -1,66 +1,84 @@
 package xyzmedical.model;
 
-import java.util.Date;
-import xyzmedical.util.Util;
+import java.sql.Date;
+import xyzmedical.db.Util;
 
 /**
  *
  * @author Will
  */
 public class Patient extends Person {
-    protected double balance;
-    protected String email;
-    protected String areaCode;
-    protected String phoneNum;
-    protected String insurance;
-    protected Date birthDate;
+    private int primaryCareProvider;
+    private float balance;
+    private String email;
+    private String phoneNum;
+    private String insurance;
+    private Date birthDate;
     
-    public Patient(int ID, String fName, String lName, double balance, String email, String area, String phoneNum, String insurance, String username, String password, Date dob) {
-        super(ID, fName, lName, username, password);
+    public Patient(int ID, String firstName, String lastName, String username,
+                String password, int primaryCareProvider, float balance, 
+                String email, String phoneNum, String insurance,
+                Date birthDate) {
+        super(ID, firstName, lastName, username, password);
+        this.primaryCareProvider = primaryCareProvider;
         this.balance = balance;
         this.email = email;
-        this.areaCode = area;
         this.phoneNum = phoneNum;
         this.insurance = insurance;
-        this.birthDate = dob;
+        this.birthDate = birthDate;
     }
     
-    public double getBalance() {
-        return balance;
+    public int getPrimaryCareProvider() {
+        return this.primaryCareProvider;
     }
     
     public String getEmail() {
-        return email;
+        return this.email;
     }
     
     public String getPhoneNum() {
-        return areaCode + phoneNum;
+        return this.phoneNum;
     }
     
     public String getInsurance() {
-        return insurance;
+        return this.insurance;
     }
     
-    public String getBirthDate() {
-        return Util.sqlValue(birthDate);
+    public float getBalance() {
+        return this.balance;
     }
     
-    public boolean setBalance(double balance) {
+    public Date getBirthDate() {
+        return this.birthDate;
+    }
+    
+    public boolean setBalance(float balance) {
         this.balance = balance;
         return true;
     }
     
+    public boolean setPrimaryCareProvider(int pcp) {
+        if (pcp < 0) {
+            return false;
+        }
+        this.primaryCareProvider = pcp;
+        return true;
+    }
+    
     public boolean setEmail(String email) {
-        if (email != null) {
+        if (email == null) {
+            this.email = "";
+        } else {
             this.email = email;
             return true;
         }
         return false;
     }
     
-    public boolean setPhoneNum(String areaCode, String phoneNum) {
-        if (areaCode != null && phoneNum != null) {
-            this.areaCode = areaCode;
+    public boolean setPhoneNum(String phoneNum) {
+        if (phoneNum == null) {
+            this.phoneNum = "";
+        } else {
             this.phoneNum = phoneNum;
             return true;
         }
@@ -68,10 +86,17 @@ public class Patient extends Person {
     }
     
     public boolean setInsurance(String insurance) {
-        if (insurance != null) {
+        if (insurance == null) {
+            this.insurance = "";
+        } else {
             this.insurance = insurance;
             return true;
         }
         return false;
+    }
+    
+    public boolean setBirthDate(Date dob) {
+        this.birthDate = dob;
+        return true;
     }
 }
