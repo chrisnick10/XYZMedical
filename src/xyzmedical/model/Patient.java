@@ -22,9 +22,9 @@ public class Patient extends Person {
         super(ID, firstName, lastName, username, password);
         this.primaryCareProvider = primaryCareProvider;
         this.balance = balance;
-        this.email = email;
-        this.phoneNum = phoneNum;
-        this.insurance = insurance;
+        setInsurance(insurance);
+        setEmail(email);
+        setPhoneNum(phoneNum);
         this.birthDate = birthDate;
     }
     
@@ -58,11 +58,8 @@ public class Patient extends Person {
     }
     
     public boolean setPrimaryCareProvider(int pcp) {
-        if (pcp < 0) {
-            return false;
-        }
         this.primaryCareProvider = pcp;
-        return true;
+        return (pcp >= 0);
     }
     
     public boolean setEmail(String email) {

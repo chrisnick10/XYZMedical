@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xyzmedical.controller;
 
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import xyzmedical.model.Patient;
 import static xyzmedical.util.HttpConnection.HttpConnection;
 
 /**
@@ -15,17 +12,13 @@ import static xyzmedical.util.HttpConnection.HttpConnection;
  */
 public class NewPatientViewController {
     
-    public static void insertNewPatient(String fName, String lName, String dob, String email, String phone, String insurance, int U_ID) {
-        String insertQuery = String.format("INSERT INTO PATIENT (P_ID,PLNAME,PFNAME,DOB,EMAIL,PHONE,INSURANCE,BALANCE,U_ID)VALUES (NULL,'%s','%s','%s',"
-                + "'%s','%s','%s','%d','%d');", lName,fName,dob,email,phone,insurance,0,U_ID);
+    public static void insertNewPatient(int ID, String firstName, 
+            String lastName, String username, String password, 
+            int primaryCareProvider, float balance, String email, 
+            String phoneNum, String insurance, Date birthDate) {
         
-        try {
-            String resultString = HttpConnection(insertQuery);
-            System.out.println(insertQuery);
-        } catch (Exception ex) {
-            Logger.getLogger(NewPatientViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-        
+        Patient p = new Patient(ID, firstName, lastName, username, password, 
+                primaryCareProvider, balance, email, phoneNum, insurance, 
+                birthDate);
     }
 }

@@ -5,27 +5,20 @@
  */
 package xyzmedical.controller;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static xyzmedical.util.HttpConnection.HttpConnection;
+import java.sql.Date;
+import xyzmedical.db.Database;
+import xyzmedical.model.Staff;
 
 /**
  *
  * @author samar
  */
 public class NewStaffViewController {
-    
-    public static void insertNewPatient(String fName, String lName, String doh, int sType,int U_ID) {
-        String insertQuery = String.format("INSERT INTO STAFF (S_ID,SLName,SFName,AccessLevel,DOH,U_ID)VALUES (NULL,'%s','%s','%d',"
-                + "'%s','%d');", lName,fName,sType,doh,U_ID);
-        
-        try {
-            String resultString = HttpConnection(insertQuery);
-            System.out.println(insertQuery);
-        } catch (Exception ex) {
-            Logger.getLogger(NewPatientViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-        
+    public static void insertNewPatient(int ID, int accessLevel, 
+            String firstName, String lastName, String username, String password,
+            Date birthDate, Date hireDate) {
+        Staff staff = new Staff(ID, accessLevel, firstName, lastName, 
+                username, password, birthDate, hireDate);
+        Database.insertStaff(staff);
     }
 }

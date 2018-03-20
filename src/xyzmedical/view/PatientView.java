@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xyzmedical.view;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import xyzmedical.controller.PatientViewController;
 import xyzmedical.model.Patient;
 
@@ -17,9 +10,7 @@ import xyzmedical.model.Patient;
 public class PatientView extends javax.swing.JFrame {
     
     private static int U_ID;
-    /**
-     * Creates new form PatientView
-     */
+
     public PatientView(int uid) {
         U_ID = uid;
         initComponents();
@@ -30,7 +21,6 @@ public class PatientView extends javax.swing.JFrame {
         } else {
             //load patient data into view
             Patient p = PatientViewController.getPatientInformation(U_ID);
-            
             patientNameLabel.setText("Name: " + p.getFirstName() + " " + p.getLastName());
             patientDOBLabel.setText("D.O.B.: " + p.getBirthDate());
             patientEmailLabel.setText("Email: " + p.getEmail());

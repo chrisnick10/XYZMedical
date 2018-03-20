@@ -5,14 +5,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.json.*;
 
 import xyzmedical.model.*;
-import xyzmedical.util.HttpConnection;
 
 /**
  *
@@ -309,7 +304,9 @@ public class Database {
             return false;
         }
         InsertStmtBuilder stmtBuilder = new InsertStmtBuilder("APPT");
-        stmtBuilder.add("ID", appt.getID());
+        if (appt.getID() >= 0) {
+            stmtBuilder.add("ID", appt.getID());
+        }
         stmtBuilder.add("STAFF_ID", appt.getStaffID());
         stmtBuilder.add("PATIENT_ID", appt.getPatientID());
         stmtBuilder.add("REASON", appt.getReason());
@@ -324,7 +321,14 @@ public class Database {
             return false;
         }
         InsertStmtBuilder stmtBuilder = new InsertStmtBuilder("PATIENT_TABLE");
-        stmtBuilder.add("PCP", patient.getPrimaryCareProvider());
+        if (patient.getID() >= 0) {
+            stmtBuilder.add("ID", patient.getID());
+        }
+        if (patient.getPrimaryCareProvider() >= 0) {
+            stmtBuilder.add("PCP", patient.getPrimaryCareProvider());
+        } else {
+            stmtBuilder.add("PCP", "");
+        }
         stmtBuilder.add("USERNAME", patient.getUsername());
         stmtBuilder.add("PASSWORD", patient.getPassword());
         stmtBuilder.add("FIRSTNAME", patient.getUsername());
@@ -343,6 +347,9 @@ public class Database {
             return false;
         }
         InsertStmtBuilder stmtBuilder = new InsertStmtBuilder("MED_INFO");
+        if (medInfo.getID() >= 0) {
+            stmtBuilder.add("ID", medInfo.getID());
+        }
         stmtBuilder.add("ID", medInfo.getID());
         stmtBuilder.add("NAME", medInfo.getName());
         stmtBuilder.add("USAGE", medInfo.getUsage());
@@ -377,7 +384,9 @@ public class Database {
             return false;
         }
         InsertStmtBuilder stmtBuilder = new InsertStmtBuilder("STAFF");
-        stmtBuilder.add("ID", staff.getID());
+        if (staff.getID() >= 0) {
+            stmtBuilder.add("ID", staff.getID());
+        }
         stmtBuilder.add("ACCESSLVL", staff.getAccessLevel());
         stmtBuilder.add("USERNAME", staff.getUsername());
         stmtBuilder.add("PASSWORD", staff.getPassword());
