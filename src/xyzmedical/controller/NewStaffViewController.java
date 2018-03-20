@@ -15,7 +15,7 @@ import static xyzmedical.utilities.HttpConnection.HttpConnection;
  */
 public class NewStaffViewController {
     
-    public static void insertNewPatient(String fName, String lName, String doh, int sType,int U_ID) {
+    public static void insertNewStaff(String fName, String lName, String doh, int sType,int U_ID) {
         String insertQuery = String.format("INSERT INTO STAFF (S_ID,SLName,SFName,AccessLevel,DOH,U_ID)VALUES (NULL,'%s','%s','%d',"
                 + "'%s','%d');", lName,fName,sType,doh,U_ID);
         
