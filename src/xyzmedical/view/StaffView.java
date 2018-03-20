@@ -41,6 +41,7 @@ public class StaffView extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
         restockMed = new javax.swing.JButton();
         enterStaffInfoButton = new javax.swing.JButton();
+        chargePatientButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,20 +76,28 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        chargePatientButton.setText("Charge Patient Account");
+        chargePatientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chargePatientButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(restockMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(staffLabel, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(scheduleButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cancelButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(enterStaffInfoButton))
-                .addContainerGap(249, Short.MAX_VALUE))
+                    .addComponent(enterStaffInfoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chargePatientButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +112,9 @@ public class StaffView extends javax.swing.JFrame {
                 .addComponent(restockMed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(enterStaffInfoButton)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chargePatientButton)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,6 +145,10 @@ public class StaffView extends javax.swing.JFrame {
         NewStaffView newSView = new NewStaffView(P_ID);
         newSView.setVisible(true);
     }//GEN-LAST:event_enterStaffInfoButtonActionPerformed
+
+    private void chargePatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chargePatientButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chargePatientButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +187,7 @@ public class StaffView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton chargePatientButton;
     private javax.swing.JButton enterStaffInfoButton;
     private javax.swing.JButton restockMed;
     private javax.swing.JButton scheduleButton;
