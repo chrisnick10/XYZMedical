@@ -61,6 +61,7 @@ public class PatientView extends javax.swing.JFrame {
         patientBalanceLabel = new javax.swing.JLabel();
         payBalanceButton = new javax.swing.JButton();
         testresult_button = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,7 +118,7 @@ public class PatientView extends javax.swing.JFrame {
                 .addComponent(patientInsuranceLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(patientBalanceLabel)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         payBalanceButton.setText("Pay Balance");
@@ -131,6 +132,13 @@ public class PatientView extends javax.swing.JFrame {
         testresult_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 testresult_buttonActionPerformed(evt);
+            }
+        });
+
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
             }
         });
 
@@ -148,7 +156,10 @@ public class PatientView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(testresult_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(payBalanceButton)))
+                        .addComponent(payBalanceButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(logoutButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -162,6 +173,8 @@ public class PatientView extends javax.swing.JFrame {
                     .addComponent(testresult_button))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logoutButton)
                 .addContainerGap())
         );
 
@@ -189,6 +202,14 @@ public class PatientView extends javax.swing.JFrame {
         
         this.dispose();
     }//GEN-LAST:event_testresult_buttonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+        LoginView lView = new LoginView();
+        lView.setVisible(true);
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,6 +250,7 @@ public class PatientView extends javax.swing.JFrame {
     private javax.swing.JButton enterPatientInfoButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JLabel patientBalanceLabel;
     private javax.swing.JLabel patientDOBLabel;
     private javax.swing.JLabel patientEmailLabel;
