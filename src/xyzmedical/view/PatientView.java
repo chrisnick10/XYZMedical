@@ -38,6 +38,7 @@ public class PatientView extends javax.swing.JFrame {
             patientInsuranceLabel.setText("Insurance: "+p.getP_insurace());
             patientBalanceLabel.setText("Account Balance: $"+p.getP_balance());
         }
+        testresult_button.setVisible(PatientViewController.hasTests(U_ID));
     }
 
     /**
@@ -58,7 +59,8 @@ public class PatientView extends javax.swing.JFrame {
         patientPhoneLabel = new javax.swing.JLabel();
         patientInsuranceLabel = new javax.swing.JLabel();
         patientBalanceLabel = new javax.swing.JLabel();
-        enterPatientInfoButton1 = new javax.swing.JButton();
+        payBalanceButton = new javax.swing.JButton();
+        testresult_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,7 +95,7 @@ public class PatientView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(patientNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(patientDOBLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                    .addComponent(patientDOBLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(patientEmailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(patientPhoneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(patientInsuranceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -118,10 +120,17 @@ public class PatientView extends javax.swing.JFrame {
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        enterPatientInfoButton1.setText("Pay Balance");
-        enterPatientInfoButton1.addActionListener(new java.awt.event.ActionListener() {
+        payBalanceButton.setText("Pay Balance");
+        payBalanceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enterPatientInfoButton1ActionPerformed(evt);
+                payBalanceButtonActionPerformed(evt);
+            }
+        });
+
+        testresult_button.setText("Test Results");
+        testresult_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testresult_buttonActionPerformed(evt);
             }
         });
 
@@ -137,7 +146,9 @@ public class PatientView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(enterPatientInfoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(enterPatientInfoButton1)))
+                        .addComponent(testresult_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(payBalanceButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,7 +158,8 @@ public class PatientView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enterPatientInfoButton)
-                    .addComponent(enterPatientInfoButton1))
+                    .addComponent(payBalanceButton)
+                    .addComponent(testresult_button))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -163,9 +175,20 @@ public class PatientView extends javax.swing.JFrame {
         newPView.setVisible(true);
     }//GEN-LAST:event_enterPatientInfoButtonActionPerformed
 
-    private void enterPatientInfoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPatientInfoButton1ActionPerformed
+    private void payBalanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBalanceButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_enterPatientInfoButton1ActionPerformed
+        this.dispose();
+        PayBalanceView payBalView = new PayBalanceView(U_ID);
+        payBalView.setVisible(true);
+    }//GEN-LAST:event_payBalanceButtonActionPerformed
+
+    private void testresult_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testresult_buttonActionPerformed
+        // TODO add your handling code here:
+        TestResultsView tResultView = new TestResultsView(U_ID);
+        tResultView.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_testresult_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,7 +227,6 @@ public class PatientView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enterPatientInfoButton;
-    private javax.swing.JButton enterPatientInfoButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel patientBalanceLabel;
@@ -213,5 +235,7 @@ public class PatientView extends javax.swing.JFrame {
     private javax.swing.JLabel patientInsuranceLabel;
     private javax.swing.JLabel patientNameLabel;
     private javax.swing.JLabel patientPhoneLabel;
+    private javax.swing.JButton payBalanceButton;
+    private javax.swing.JButton testresult_button;
     // End of variables declaration//GEN-END:variables
 }

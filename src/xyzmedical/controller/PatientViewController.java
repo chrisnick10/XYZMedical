@@ -55,4 +55,25 @@ public class PatientViewController {
     public static void payBalance(int U_ID) {
         
     }
+    
+    
+    public static boolean hasTests(int U_ID) {
+        String uidQuery = "SELECT * FROM LABRESULTS WHERE U_ID = "+U_ID+";";
+        try {
+            String resultJSON = HttpConnection(uidQuery);
+            JSONArray jsonArr = new JSONArray(resultJSON);
+            
+            if (jsonArr.length() > 0) {
+                System.out.println("Has tests");
+                return true;
+            } else {
+                System.out.println("No Tests.");
+                return false;
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(PatientViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;        
+    }
 }
