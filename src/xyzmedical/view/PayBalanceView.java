@@ -99,6 +99,13 @@ public class PayBalanceView extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
+        Double amount = Double.parseDouble(amountTextField.getText());
+        
+        PayBalanceViewController.payBalance(U_ID, amount);
+        
+        this.dispose();
+        PatientView pView = new PatientView(U_ID);
+        pView.setVisible(true);
     }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
