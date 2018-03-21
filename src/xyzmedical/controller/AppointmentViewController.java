@@ -63,20 +63,79 @@ public class AppointmentViewController {
         return true;
     }
     
-    public static String[] getDoctorList(){
+    public static List<String> getDoctorList(){
         
         try {
             String doctorListQuery = "SELECT SLName, SFName FROM STAFF WHERE AccessLevel = 1";
             String doctorList = HttpConnection(doctorListQuery);
             JSONArray jsonArr = new JSONArray(doctorList);
-            System.out.println(doctorList);
-            String[] retList = {};
-            return retList;
+            List<String> docList = new ArrayList<String>();
+            
+            for (int i = 0; i < jsonArr.length(); i++) {
+                docList.add(jsonArr.getJSONObject(i).getString("SFName") + jsonArr.getJSONObject(i).getString("SLName"));
+            }
+            
+            return docList;
         } catch (Exception ex) {
             Logger.getLogger(AppointmentViewController.class.getName()).log(Level.SEVERE, null, ex);
-            String[] retList = {};
-            return retList;
+            List<String> docList = new ArrayList<String>();
+            return docList;
         }
     }
     
+    public static List<String> getPatientList(){
+        
+        try {
+            String patientListQuery = "SELECT PFNAME, PLNAME FROM PATIENT";
+            String patientList = HttpConnection(patientListQuery);
+            JSONArray jsonArr = new JSONArray(patientList);
+            List<String> pList = new ArrayList<String>();
+            
+            for (int i = 0; i < jsonArr.length(); i++) {
+                String name = jsonArr.getJSONObject(i).getString("PFNAME") + " " + jsonArr.getJSONObject(i).getString("PLNAME");
+                pList.add(name);
+            }
+            
+            return pList;
+        } catch (Exception ex) {
+            Logger.getLogger(AppointmentViewController.class.getName()).log(Level.SEVERE, null, ex);
+            List<String> pList = new ArrayList<String>();
+            return pList;
+        }
+    }
+    
+    public static int getPatientId(String patientName){
+        
+        try {
+            String fName = patientName.substring(0, patientName.indexOf(" "));
+            
+            String patientIdQuery = "SELECT P_ID FROM PATIENT WHERE PFNAME = '" + fName + "'";
+            String patientList = HttpConnection(patientIdQuery);
+            JSONArray jsonArr = new JSONArray(patientList); 
+            
+            return Integer.parseInt(jsonArr.getJSONObject(0).getString("P_ID"));
+        } catch (Exception ex) {
+            return 0;
+        }
+    }
+    
+    public static List<String> getAppointmentList(){
+        try {
+            String apptListQuery = "SELECT TOP 5 DATE FROM APPOINTMENTS";
+            String apptList = HttpConnection(apptListQuery);
+            JSONArray jsonArr = new JSONArray(apptList);
+            List<String> aList = new ArrayList<String>();
+            
+            for (int i = 0; i < jsonArr.length(); i++) {
+                String name = jsonArr.getJSONObject(i).getString("DATE");
+                aList.add(name);
+            }
+            
+            return aList;
+        } catch (Exception ex) {
+            Logger.getLogger(AppointmentViewController.class.getName()).log(Level.SEVERE, null, ex);
+            List<String> pList = new ArrayList<String>();
+            return pList;
+        }
+    }
 }
