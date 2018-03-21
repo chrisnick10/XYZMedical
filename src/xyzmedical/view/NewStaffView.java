@@ -5,6 +5,7 @@
  */
 package xyzmedical.view;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import xyzmedical.controller.NewPatientViewController;
@@ -17,15 +18,24 @@ import xyzmedical.controller.NewStaffViewController;
 public class NewStaffView extends javax.swing.JFrame {
 
     private static int S_ID;
+    private static String[] sTypes = null;
+    private static String username;
+    private static String password;
     /**
      * Creates new form NewPatientView
      */
-    public NewStaffView(int sid) {
+    public NewStaffView(int sid, String username, String password) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.S_ID = sid;
+        this.username = username;
+        this.password = password;
         
-       setJStaffType();
+        sTypes = new String[4];
+        sTypes[0] = "Doctor";
+        sTypes[1] = "Nurse/receptionist";
+        sTypes[2] = "Pharmacist";
+        sTypes[3] = "System Admin";
     }
 
     /**
@@ -195,12 +205,11 @@ public class NewStaffView extends javax.swing.JFrame {
         // TODO add your handling code here:
         String fName = fnameTextField.getText();
         String lName = lnameTextField.getText();
-        String dob = yearTextField.getText()+"-"+monthTextField.getText()+"-"+dayTextField.getText();
-        
-        NewStaffViewController.insertNewPatient(fName,lName,dob, staff_type.getSelectedIndex() + 1,S_ID);
-
+        Date dob = this.getBirthDate();
+        Date hireDate = this.getHireDate();
+        NewStaffViewController.insertNewPatient(-1, this.getJStaffType(), fName, lName, this.username, this.password, dob, hireDate);
         this.dispose();
-        StaffView pView = new StaffView(S_ID);
+        StaffView pView = new StaffView(S_ID, this.username, this.password);
         pView.setVisible(true);
     }//GEN-LAST:event_submitActionPerformed
 
@@ -234,19 +243,36 @@ public class NewStaffView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewStaffView(S_ID).setVisible(true);
+                new NewStaffView(S_ID, username, password).setVisible(true);
             }
         });
     }
     
+    private Date getBirthDate() {
+        Date d = new Date(Integer.valueOf(yearTextField.getText()),
+                Integer.valueOf(monthTextField.getText()),
+                Integer.valueOf(dayTextField.getText()));
+        return d;
+    }
+    
+    private Date getHireDate() {
+        // TODO add components to get and parse a hire date
+        return null;
+    }
+    
+    private int getJStaffType() {
+        String typeName = staff_type.getSelectedValue();
+        int typeID = -1;
+        for (int i = 0; i < sTypes.length; ++i) {
+            if (sTypes[i].equalsIgnoreCase(typeName)) {
+                typeID = i;
+                break;
+            }
+        }
+        return typeID;
+    }
+    
     private void setJStaffType() {
-        
-        String[] sTypes = new String[4];
-        sTypes[0] = "Doctor";
-        sTypes[1] = "Nurse/receptionist";
-        sTypes[2] = "Pharmacist";
-        sTypes[3] = "System Admin";
-        
         staff_type.setListData(sTypes);
     }
 

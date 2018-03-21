@@ -494,4 +494,16 @@ public class Database {
     public static boolean deleteStaff(Staff staff) {
         return deleteStaff(staff.getID());
     }
+    
+    // TODO throwaway when more generic methods realized
+    public static float setBalance(int patientID, float newBalance) {
+        String updateQuery = "UPDATE `PATIENT_TABLE` SET `BALANCE` = ";
+        updateQuery += String.valueOf(newBalance);
+        updateQuery += " WHERE `ID` = " + String.valueOf(patientID);
+        execQuery(updateQuery);
+        if (patientExists(patientID)) {
+            return searchPatients("ID", patientID).get(0).getBalance();
+        }
+        return -1;
+    }
 }

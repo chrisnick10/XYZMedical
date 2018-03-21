@@ -15,11 +15,15 @@ import xyzmedical.controller.StaffViewController;
 public class StaffView extends javax.swing.JFrame {
 
     private static int P_ID;
+    private static String username;
+    private static String password;
     /**
      * Creates new form StaffView
      */
-    public StaffView(int p_id) {
-        P_ID = p_id;
+    public StaffView(int p_id, String username, String password) {
+        this.P_ID = p_id;
+        this.username = username;
+        this.password = password;
         initComponents();
         this.setLocationRelativeTo(null);
         enterStaffInfoButton.setVisible(
@@ -131,7 +135,7 @@ public class StaffView extends javax.swing.JFrame {
     private void enterStaffInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterStaffInfoButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        NewStaffView newSView = new NewStaffView(P_ID);
+        NewStaffView newSView = new NewStaffView(P_ID, username, password);
         newSView.setVisible(true);
     }//GEN-LAST:event_enterStaffInfoButtonActionPerformed
 
@@ -165,7 +169,7 @@ public class StaffView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffView(P_ID).setVisible(true);
+                new StaffView(P_ID, username, password).setVisible(true);
             }
         });
     }
