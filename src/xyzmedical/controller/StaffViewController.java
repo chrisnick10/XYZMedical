@@ -26,11 +26,11 @@ public class StaffViewController {
             JSONArray jsonArr = new JSONArray(resultJSON);
             
             if (jsonArr.length() > 0) {
-                System.out.println("new staff. need info.");
-                return true;
-            } else {
                 System.out.println("not new Staff");
                 return false;
+            } else {
+                System.out.println("new staff. need info.");
+                return true;
             }
             
         } catch (Exception ex) {
