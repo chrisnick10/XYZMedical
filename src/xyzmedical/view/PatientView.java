@@ -5,6 +5,7 @@
  */
 package xyzmedical.view;
 
+import java.text.DecimalFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import xyzmedical.controller.PatientViewController;
@@ -36,7 +37,12 @@ public class PatientView extends javax.swing.JFrame {
             patientEmailLabel.setText("Email: "+p.getP_email());
             patientPhoneLabel.setText("Phone: "+p.getP_phone());
             patientInsuranceLabel.setText("Insurance: "+p.getP_insurace());
-            patientBalanceLabel.setText("Account Balance: $"+p.getP_balance());
+            
+            DecimalFormat numberFormat = new DecimalFormat("#.00");
+            
+            patientBalanceLabel.setText("Account Balance: $"+numberFormat.format(Double.parseDouble(p.getP_balance())));
+            
+            
         }
         testresult_button.setVisible(PatientViewController.hasTests(U_ID));
     }
