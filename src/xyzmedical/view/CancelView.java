@@ -5,6 +5,11 @@
  */
 package xyzmedical.view;
 
+import java.util.List;
+import java.util.ArrayList;
+import xyzmedical.controller.AppointmentViewController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nhine
@@ -16,6 +21,11 @@ public class CancelView extends javax.swing.JFrame {
      */
     public CancelView() {
         initComponents();
+        appointmentList.setVisible(false);
+        List<String> patients = AppointmentViewController.getPatientList();
+        String[] pList = new String[patients.size()];
+        patients.toArray(pList);
+        patientList.setListData(pList);
     }
 
     /**
@@ -27,21 +37,98 @@ public class CancelView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        patientList = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        cancelButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        appointmentList = new javax.swing.JList<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Cancel Appointment");
+
+        patientList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                patientListMouseClicked(evt);
+            }
+        });
+        patientList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                patientListValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(patientList);
+
+        jLabel2.setText("Select patient with appointment to be cancelled:");
+
+        cancelButton.setText("Confirm Cancellation");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(appointmentList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(cancelButton))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(cancelButton)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void patientListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientListMouseClicked
+        // TODO add your handling code here:
+        appointmentList.setVisible(true);
+        List<String> dates = AppointmentViewController.getAppointmentList();
+        //String[] aList = new String[dates.size()] {"03/21/2018", "03/28/2018", "05/13/2018", "07/25/2018"};
+        String[] aList = {"03/21/2018", "03/28/2018", "05/13/2018", "07/25/2018"};
+        //dates.toArray(aList);
+        appointmentList.setListData(aList);
+    }//GEN-LAST:event_patientListMouseClicked
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        StaffView nextView = new StaffView(1);
+        nextView.setVisible(true);
+        //
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void patientListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_patientListValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patientListValueChanged
 
     /**
      * @param args the command line arguments
@@ -79,5 +166,12 @@ public class CancelView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> appointmentList;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> patientList;
     // End of variables declaration//GEN-END:variables
 }
