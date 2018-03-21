@@ -23,7 +23,7 @@ public class StaffView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         enterStaffInfoButton.setVisible(
-                !PatientViewController.isNewPatient(P_ID)
+                StaffViewController.isNewStaff(P_ID)
         );
     }
 
@@ -136,7 +136,9 @@ public class StaffView extends javax.swing.JFrame {
 
     private void restockMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restockMedActionPerformed
         // TODO add your handling code here:
-        
+        this.dispose();
+        MedicationRestockView mRestock = new MedicationRestockView(P_ID);
+        mRestock.setVisible(true);
     }//GEN-LAST:event_restockMedActionPerformed
 
     private void enterStaffInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterStaffInfoButtonActionPerformed
