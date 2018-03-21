@@ -58,7 +58,7 @@ public class PatientView extends javax.swing.JFrame {
         patientPhoneLabel = new javax.swing.JLabel();
         patientInsuranceLabel = new javax.swing.JLabel();
         patientBalanceLabel = new javax.swing.JLabel();
-        enterPatientInfoButton1 = new javax.swing.JButton();
+        payBalanceButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,10 +118,10 @@ public class PatientView extends javax.swing.JFrame {
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        enterPatientInfoButton1.setText("Pay Balance");
-        enterPatientInfoButton1.addActionListener(new java.awt.event.ActionListener() {
+        payBalanceButton.setText("Pay Balance");
+        payBalanceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enterPatientInfoButton1ActionPerformed(evt);
+                payBalanceButtonActionPerformed(evt);
             }
         });
 
@@ -137,7 +137,7 @@ public class PatientView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(enterPatientInfoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(enterPatientInfoButton1)))
+                        .addComponent(payBalanceButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,7 +147,7 @@ public class PatientView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enterPatientInfoButton)
-                    .addComponent(enterPatientInfoButton1))
+                    .addComponent(payBalanceButton))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -163,9 +163,12 @@ public class PatientView extends javax.swing.JFrame {
         newPView.setVisible(true);
     }//GEN-LAST:event_enterPatientInfoButtonActionPerformed
 
-    private void enterPatientInfoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPatientInfoButton1ActionPerformed
+    private void payBalanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBalanceButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_enterPatientInfoButton1ActionPerformed
+        this.dispose();
+        PayBalanceView payBalView = new PayBalanceView(U_ID);
+        payBalView.setVisible(true);
+    }//GEN-LAST:event_payBalanceButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,7 +207,6 @@ public class PatientView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enterPatientInfoButton;
-    private javax.swing.JButton enterPatientInfoButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel patientBalanceLabel;
@@ -213,5 +215,6 @@ public class PatientView extends javax.swing.JFrame {
     private javax.swing.JLabel patientInsuranceLabel;
     private javax.swing.JLabel patientNameLabel;
     private javax.swing.JLabel patientPhoneLabel;
+    private javax.swing.JButton payBalanceButton;
     // End of variables declaration//GEN-END:variables
 }

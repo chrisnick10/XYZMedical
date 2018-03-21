@@ -31,7 +31,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="enterPatientInfoButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="enterPatientInfoButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="payBalanceButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -45,7 +45,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="enterPatientInfoButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="enterPatientInfoButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="payBalanceButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
@@ -147,12 +147,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="enterPatientInfoButton1">
+    <Component class="javax.swing.JButton" name="payBalanceButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pay Balance"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enterPatientInfoButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="payBalanceButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
