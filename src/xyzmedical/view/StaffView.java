@@ -148,6 +148,9 @@ public class StaffView extends javax.swing.JFrame {
 
     private void chargePatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chargePatientButtonActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        ChargePatientView view = new ChargePatientView(P_ID);
+        view.setVisible(true);
     }//GEN-LAST:event_chargePatientButtonActionPerformed
 
     /**
