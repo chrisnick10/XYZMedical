@@ -14,296 +14,46 @@ import xyzmedical.model.*;
  * @author Will
  */
 public class Database {
-    private final static String DB_PATH = "http://76.230.142.194/csi3370/sql_query1.php?query=";
-    
-    // Query execution method
-    private static String execQuery(String query) {
-        System.out.println(query);
-        String result = "";
-        String urlStr = DB_PATH + query;
-        urlStr = urlStr.replaceAll(" ", "+");
-        urlStr = urlStr.replaceAll("'", "%27");
-
-        try {
-            URL url = new URL(urlStr);
-            URLConnection connection = url.openConnection();
-            
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setAllowUserInteraction(false);
-            
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            
-            String ln = null;
-            while ((ln = br.readLine()) != null) {
-                result += ln;
-            }
-            
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    
-    
-    // Methods for retrieving raw JSON info from db
-    private static ArrayList<Appointment> apptQuery(String query) {
-        ArrayList<Appointment> apptList = new ArrayList<>();
-        try {
-            JSONArray jsonArr = new JSONArray(execQuery(query));
-            for (int i = 0; i < jsonArr.length(); ++i) {
-                JSONObject obj = jsonArr.getJSONObject(i);
-                Appointment appt = ModelFactory.createAppointment(obj);
-                if (appt != null) {
-                    apptList.add(appt);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return apptList;
-    }
-    
-    private static ArrayList<Patient> patientQuery(String query) {
-        ArrayList<Patient> patientList = new ArrayList<>();
-        try {
-            JSONArray jsonArr = new JSONArray(execQuery(query));
-            for (int i = 0; i < jsonArr.length(); ++i) {
-                JSONObject obj = jsonArr.getJSONObject(i);
-                Patient patient = ModelFactory.createPatient(obj);
-                if (patient != null) {
-                    patientList.add(patient);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return patientList;
-    }
-    
-    private static ArrayList<MedInfo> medinfoQuery(String query) {
-        ArrayList<MedInfo> medinfoList = new ArrayList<>();
-        try {
-            JSONArray jsonArr = new JSONArray(execQuery(query));
-            for (int i = 0; i < jsonArr.length(); ++i) {
-                JSONObject obj = jsonArr.getJSONObject(i);
-                MedInfo medinfo = ModelFactory.createMedInfo(obj);
-                if (medinfo != null) {
-                    medinfoList.add(medinfo);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return medinfoList;
-    }
-    
-    private static ArrayList<Prescription> prescriptionQuery(String query) {
-        ArrayList<Prescription> prescriptionList = new ArrayList<>();
-        try {
-            JSONArray jsonArr = new JSONArray(execQuery(query));
-            for (int i = 0; i < jsonArr.length(); ++i) {
-                JSONObject obj = jsonArr.getJSONObject(i);
-                Prescription med = ModelFactory.createPrescription(obj);
-                if (med != null) {
-                    prescriptionList.add(med);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return prescriptionList;
-    }
-    
-    private static ArrayList<Staff> staffQuery(String query) {
-        ArrayList<Staff> staffList = new ArrayList<>();
-        try {
-            JSONArray jsonArr = new JSONArray(execQuery(query));
-            for (int i = 0; i < jsonArr.length(); ++i) {
-                JSONObject obj = jsonArr.getJSONObject(i);
-                Staff staff = ModelFactory.createStaff(obj);
-                if (staff != null) {
-                    staffList.add(staff);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return staffList;
-    }
+    public static final String APPT_TABLE_NAME = "APPT";
+    public static final String PATIENT_TABLE_NAME = "PATIENT_TABLE";
+    public static final String MEDINFO_TABLE_NAME = "MED_INFO";
+    public static final String RX_TABLE_NAME = "PRESCRIPT";
+    public static final String STAFF_TABLE_NAME = "STAFF_TABLE";
     
     
     
-    // SEARCH METHODS FOR EQUALITY CONDITIONS
-    public static ArrayList<Appointment> allAppts() {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("APPTS");
-        return apptQuery(stmtBuilder.generateStmt());
-    }
-    
+    // APPOINTMENT TABLE INTERFACE
     public static ArrayList<Appointment> searchAppts(String key, int value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("APPTS");
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(APPT_TABLE_NAME);
         stmtBuilder.add(key, value);
-        return apptQuery(stmtBuilder.generateStmt());
+        return QueryRunner.apptQuery(stmtBuilder.generateStmt());
     }
     
     public static ArrayList<Appointment> searchAppts(String key, String value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("APPTS");
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(APPT_TABLE_NAME);
         stmtBuilder.add(key, value);
-        return apptQuery(stmtBuilder.generateStmt());
+        return QueryRunner.apptQuery(stmtBuilder.generateStmt());
     }
     
-    public static ArrayList<Patient> allPatients() {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("PATIENT_TABLE");
-        return patientQuery(stmtBuilder.generateStmt());
+    public static boolean apptExists(int apptID) {
+        return searchAppts("ID", apptID).size() > 0;
     }
     
-    public static ArrayList<Patient> searchPatients(String key, int value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("PATIENT_TABLE");
-        stmtBuilder.add(key, value);
-        return patientQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static ArrayList<Patient> searchPatients(String key, String value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("PATIENT_TABLE");
-        stmtBuilder.add(key, value);
-        return patientQuery(stmtBuilder.generateStmt());
-    }
-
-    public static ArrayList<MedInfo> allMedInfo() {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("MED_INFO");
-        return medinfoQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static ArrayList<MedInfo> searchMedInfo(String key, int value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("MED_INFO");
-        stmtBuilder.add(key, value);
-        return medinfoQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static ArrayList<MedInfo> searchMedInfo(String key, String value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("MED_INFO");
-        stmtBuilder.add(key, value);
-        return medinfoQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static ArrayList<Prescription> allPrescriptions() {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("PRESCRIPT");
-        return prescriptionQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static ArrayList<Prescription> searchPrescriptions(String key, int value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("PRESCRIPT");
-        stmtBuilder.add(key, value);
-        return prescriptionQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static ArrayList<Prescription> searchPrescriptions(String key, String value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("PRESCRIPT");
-        stmtBuilder.add(key, value);
-        return prescriptionQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static ArrayList<Staff> allStaff() {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("STAFF_TABLE");
-        return staffQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static ArrayList<Staff> searchStaff(String key, int value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("STAFF_TABLE");
-        stmtBuilder.add(key, value);
-        return staffQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static ArrayList<Staff> searchStaff(String key, String value) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("STAFF_TABLE");
-        stmtBuilder.add(key, value);
-        return staffQuery(stmtBuilder.generateStmt());
-    }
-
-    
-    
-    // EXISTENCE METHODS
-    public static boolean appointmentExists(int apptID) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("APPT");
+    public static boolean deleteAppt(int apptID) {
+        if (!apptExists(apptID)) {
+            return false;
+        }
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(APPT_TABLE_NAME);
         stmtBuilder.add("ID", apptID);
-        String searchResult = execQuery(stmtBuilder.generateStmt() + " ORDER BY 'ID' ASC");
-        if (searchResult.equals("[]")) {
-            return false;
-        }
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
     
-    public static boolean appointmentExists(Appointment appt) {
-        return appointmentExists(appt.getID());
-    }
-    
-    public static boolean patientExists(int patientID) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("PATIENT_TABLE");
-        stmtBuilder.add("ID", patientID);
-        String searchResult = execQuery(stmtBuilder.generateStmt() + " ORDER BY 'ID' ASC");
-        if (searchResult.equals("[]")) {
-            return false;
-        }
-        return true;
-    }
-    
-    public static boolean patientExists(Patient patient) {
-        return patientExists(patient.getID());
-    }
-    
-    public static boolean medInfoExists(int medID) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("MED_INFO");
-        stmtBuilder.add("ID", medID);
-        String searchResult = execQuery(stmtBuilder.generateStmt() + " ORDER BY 'ID' ASC");
-        if (searchResult.equals("[]")) {
-            return false;
-        }
-        return true;
-    }
-    
-    public static boolean medInfoExists(MedInfo medInfo) {
-        return medInfoExists(medInfo.getID());
-    }
-    
-    public static boolean prescriptionExists(int apptID, int patientID) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("PRESCRIPT");
-        stmtBuilder.add("APPT_ID", apptID);
-        stmtBuilder.add("PATIENT_ID", patientID);
-        String searchResult = execQuery(stmtBuilder.generateStmt() + " ORDER BY 'DATE' ASC");
-        if (searchResult.equals("[]")) {
-            return false;
-        }
-        return true;
-    }
-    
-    public static boolean prescriptionExists(Prescription p) {
-        return prescriptionExists(p.getAppointmentID(), p.getPatientID());
-    }
-    
-    public static boolean staffExists(int staffID) {
-        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder("STAFF_TABLE");
-        stmtBuilder.add("ID", staffID);
-        String searchResult = execQuery(stmtBuilder.generateStmt() + " ORDER BY 'ID' ASC");
-        if (searchResult.equals("[]")) {
-            return false;
-        }
-        return true;
-    }
-    
-    public static boolean staffExists(Staff staff) {
-        return staffExists(staff.getID());
-    }
-    
-    
-    
-    // INSERTION METHODS
     public static boolean insertAppt(Appointment appt) {
-        if (appointmentExists(appt)) {
+        if (apptExists(appt.getID())) {
             return false;
         }
-        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder("APPT");
+        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(APPT_TABLE_NAME);
         if (appt.getID() >= 0) {
             stmtBuilder.add("ID", appt.getID());
         }
@@ -312,15 +62,44 @@ public class Database {
         stmtBuilder.add("REASON", appt.getReason());
         stmtBuilder.add("SUMMARY", appt.getSummary());
         stmtBuilder.add("TIME", appt.getTime());
-        execQuery(stmtBuilder.generateStmt());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
     
-    public static boolean insertPatient(Patient patient) {
-        if (patientExists(patient)) {
+    
+    
+    // PATIENT TABLE INTERFACE
+    public static ArrayList<Patient> searchPatients(String key, int value) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(PATIENT_TABLE_NAME);
+        stmtBuilder.add(key, value);
+        return QueryRunner.patientQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static ArrayList<Patient> searchPatients(String key, String value) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(PATIENT_TABLE_NAME);
+        stmtBuilder.add(key, value);
+        return QueryRunner.patientQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static boolean patientExists(int patientID) {
+        return searchPatients("ID", patientID).size() > 0;
+    }
+    
+    public static boolean deletePatient(int patientID) {
+        if (!patientExists(patientID)) {
             return false;
         }
-        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder("PATIENT_TABLE");
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(PATIENT_TABLE_NAME);
+        stmtBuilder.add("ID", patientID);
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
+        return true;
+    }
+        
+    public static boolean insertPatient(Patient patient) {
+        if (patientExists(patient.getID())) {
+            return false;
+        }
+        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(PATIENT_TABLE_NAME);
         if (patient.getID() >= 0) {
             stmtBuilder.add("ID", patient.getID());
         }
@@ -338,15 +117,44 @@ public class Database {
         stmtBuilder.add("INSURANCE", patient.getInsurance());
         stmtBuilder.add("BALANCE", patient.getBalance());
         stmtBuilder.add("BIRTH_DATE", patient.getBirthDate());
-        execQuery(stmtBuilder.generateStmt());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
+        return true;
+    }
+    
+    
+    
+    // MEDINFO TABLE INTERFACE
+    public static ArrayList<MedInfo> searchMedInfo(String key, int value) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(MEDINFO_TABLE_NAME);
+        stmtBuilder.add(key, value);
+        return QueryRunner.medinfoQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static ArrayList<MedInfo> searchMedInfo(String key, String value) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(MEDINFO_TABLE_NAME);
+        stmtBuilder.add(key, value);
+        return QueryRunner.medinfoQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static boolean medInfoExists(int medID) {
+        return searchMedInfo("ID", medID).size() > 0;
+    }
+    
+    public static boolean deleteMedInfo(int medID) {
+        if (!medInfoExists(medID)) {
+            return false;
+        }
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(MEDINFO_TABLE_NAME);
+        stmtBuilder.add("ID", medID);
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
     
     public static boolean insertMedInfo(MedInfo medInfo) {
-        if (medInfoExists(medInfo)) {
+        if (medInfoExists(medInfo.getID())) {
             return false;
         }
-        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder("MED_INFO");
+        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(MEDINFO_TABLE_NAME);
         if (medInfo.getID() >= 0) {
             stmtBuilder.add("ID", medInfo.getID());
         }
@@ -355,15 +163,42 @@ public class Database {
         stmtBuilder.add("USAGE", medInfo.getUsage());
         stmtBuilder.add("DESCRIPTION", medInfo.getDescription());
         stmtBuilder.add("SIDE_EFFECTS", medInfo.getSideEffects());
-        execQuery(stmtBuilder.generateStmt());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
     
+    
+    
+    // PRESCRIPTION TABLE INTERFACE
+    public static ArrayList<Prescription> allPrescriptions() {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(RX_TABLE_NAME);
+        return QueryRunner.prescriptionQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static ArrayList<Prescription> searchPrescriptions(String key, int value) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(RX_TABLE_NAME);
+        stmtBuilder.add(key, value);
+        return QueryRunner.prescriptionQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static ArrayList<Prescription> searchPrescriptions(String key, String value) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(RX_TABLE_NAME);
+        stmtBuilder.add(key, value);
+        return QueryRunner.prescriptionQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static boolean prescriptionExists(int apptID, int patientID) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(RX_TABLE_NAME);
+        stmtBuilder.add("APPT_ID", apptID);
+        stmtBuilder.add("PATIENT_ID", patientID);
+        return QueryRunner.prescriptionQuery(stmtBuilder.generateStmt()).size() > 0;
+    }
+    
     public static boolean insertPrescription(Prescription p) {
-        if (prescriptionExists(p)) {
+        if (prescriptionExists(p.getAppointmentID(), p.getPatientID())) {
             return false;
         }
-        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder("PRESCRIPT");
+        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(RX_TABLE_NAME);
         stmtBuilder.add("APPT_ID", p.getAppointmentID());
         stmtBuilder.add("MED_ID", p.getMedID());
         stmtBuilder.add("STAFF_ID", p.getStaffID());
@@ -375,15 +210,38 @@ public class Database {
         stmtBuilder.add("FREQ_UNIT", p.getFreq().getTimeUnit());
         stmtBuilder.add("REFILLS", p.getRefills());
         stmtBuilder.add("DATE", p.getDate());
-        execQuery(stmtBuilder.generateStmt());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
     
+    
+    // STAFF TABLE INTERFACE
+    public static ArrayList<Staff> allStaff() {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(STAFF_TABLE_NAME);
+        return QueryRunner.staffQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static ArrayList<Staff> searchStaff(String key, int value) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(STAFF_TABLE_NAME);
+        stmtBuilder.add(key, value);
+        return QueryRunner.staffQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static ArrayList<Staff> searchStaff(String key, String value) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(STAFF_TABLE_NAME);
+        stmtBuilder.add(key, value);
+        return QueryRunner.staffQuery(stmtBuilder.generateStmt());
+    }
+
+    public static boolean staffExists(int staffID) {
+        return searchStaff("ID", staffID).size() > 0;
+    }
+    
     public static boolean insertStaff(Staff staff) {
-        if (staffExists(staff)) {
+        if (staffExists(staff.getID())) {
             return false;
         }
-        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder("STAFF");
+        InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(STAFF_TABLE_NAME);
         if (staff.getID() >= 0) {
             stmtBuilder.add("ID", staff.getID());
         }
@@ -394,65 +252,12 @@ public class Database {
         stmtBuilder.add("LASTNAME", staff.getLastName());
         stmtBuilder.add("BIRTH_DATE", staff.getBirthDate());
         stmtBuilder.add("HIRE_DATE", staff.getHireDate());
-        execQuery(stmtBuilder.generateStmt());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
+
     
-    
-    
-    // DELETE METHODS
-    public static void deleteAppt(String key, String value) {
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("APPT");
-        stmtBuilder.add(key, value);
-        execQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static void deleteAppt(String key, int value) {
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("APPT");
-        stmtBuilder.add(key, value);
-        execQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static boolean deleteAppt(int apptID) {
-        if (!appointmentExists(apptID)) {
-            return false;
-        }
-        deleteAppt("ID", apptID);
-        return true;
-    }
-    
-    public static boolean deleteAppt(Appointment appt) {
-        return deleteAppt(appt.getID());
-    }
-    
-    public static boolean deletePatient(int patientID) {
-        if (!patientExists(patientID)) {
-            return false;
-        }
-        return true;
-    }
-    
-    public static void deleteMedInfo(String key, String value) {
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("MED_INFO");
-        stmtBuilder.add(key, value);
-        execQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static void deleteMedInfo(String key, int value) {
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("MED_INFO");
-        stmtBuilder.add(key, value);
-        execQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static boolean deleteMedInfo(int medID) {
-        if (!medInfoExists(medID)) {
-            return false;
-        }
-        deleteMedInfo("ID", medID);
-        return true;
-    }
-    
-    public static boolean deleteMedInfo(MedInfo medInfo) {
+    public static  boolean deleteMedInfo(MedInfo medInfo) {
         return deleteMedInfo(medInfo.getID());
     }
     
@@ -460,10 +265,10 @@ public class Database {
         if (!prescriptionExists(apptID, patientID)) {
             return false;
         }
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("PRESCRIPT");
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(RX_TABLE_NAME);
         stmtBuilder.add("APPT_ID", apptID);
         stmtBuilder.add("PATIENT_ID", patientID);
-        execQuery(stmtBuilder.generateStmt());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
     
@@ -472,15 +277,15 @@ public class Database {
     }
     
     public static void deleteStaff(String key, String value) {
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("STAFF");
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(STAFF_TABLE_NAME);
         stmtBuilder.add(key, value);
-        execQuery(stmtBuilder.generateStmt());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
     }
     
     public static void deleteStaff(String key, int value) {
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder("STAFF");
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(STAFF_TABLE_NAME);
         stmtBuilder.add(key, value);
-        execQuery(stmtBuilder.generateStmt());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
     }
     
     public static boolean deleteStaff(int staffID) {
@@ -490,17 +295,17 @@ public class Database {
         deleteStaff("ID", staffID);
         return true;
     }
-    
+
     public static boolean deleteStaff(Staff staff) {
         return deleteStaff(staff.getID());
     }
     
     // TODO throwaway when more generic methods realized
     public static float setBalance(int patientID, float newBalance) {
-        String updateQuery = "UPDATE `PATIENT_TABLE` SET `BALANCE` = ";
+        String updateQuery = "UPDATE `" + PATIENT_TABLE_NAME + "` SET `BALANCE` = ";
         updateQuery += String.valueOf(newBalance);
         updateQuery += " WHERE `ID` = " + String.valueOf(patientID);
-        execQuery(updateQuery);
+        QueryRunner.execQuery(updateQuery);
         if (patientExists(patientID)) {
             return searchPatients("ID", patientID).get(0).getBalance();
         }
