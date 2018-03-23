@@ -54,18 +54,28 @@ public class Database {
             return false;
         }
         InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(APPT_TABLE_NAME);
-        if (appt.getID() >= 0) {
-            stmtBuilder.add("ID", appt.getID());
-        }
-        stmtBuilder.add("STAFF_ID", appt.getStaffID());
-        stmtBuilder.add("PATIENT_ID", appt.getPatientID());
-        stmtBuilder.add("REASON", appt.getReason());
-        stmtBuilder.add("SUMMARY", appt.getSummary());
-        stmtBuilder.add("TIME", appt.getTime());
+        stmtBuilder.add(appt);
         QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
     
+    public static boolean updateAppt(Appointment appt) {
+        if (!apptExists(appt.getID())) {
+            return false;
+        }
+        UpdateStmtBuilder stmtBuilder = new UpdateStmtBuilder(APPT_TABLE_NAME);
+        stmtBuilder.add(appt);
+        stmtBuilder.addCondition("ID", appt.getID());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
+        return true;
+    }
+    
+    public static void save(Appointment appt) {
+        if (!insertAppt(appt)) {
+            updateAppt(appt);
+        }
+    }
+
     
     
     // PATIENT TABLE INTERFACE
@@ -81,8 +91,16 @@ public class Database {
         return QueryRunner.patientQuery(stmtBuilder.generateStmt());
     }
     
+    public static Patient getPatient(int patientID) {
+        ArrayList<Patient> patients = searchPatients("ID", patientID);
+        if (patients.size() == 1) {
+            return patients.get(0);
+        }
+        return null;
+    }
+    
     public static boolean patientExists(int patientID) {
-        return searchPatients("ID", patientID).size() > 0;
+        return getPatient(patientID) != null;
     }
     
     public static boolean deletePatient(int patientID) {
@@ -100,24 +118,45 @@ public class Database {
             return false;
         }
         InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(PATIENT_TABLE_NAME);
-        if (patient.getID() >= 0) {
-            stmtBuilder.add("ID", patient.getID());
-        }
-        if (patient.getPrimaryCareProvider() >= 0) {
-            stmtBuilder.add("PCP", patient.getPrimaryCareProvider());
-        } else {
-            stmtBuilder.add("PCP", "");
-        }
-        stmtBuilder.add("USERNAME", patient.getUsername());
-        stmtBuilder.add("PASSWORD", patient.getPassword());
-        stmtBuilder.add("FIRSTNAME", patient.getUsername());
-        stmtBuilder.add("LASTNAME", patient.getLastName());
-        stmtBuilder.add("EMAIL", patient.getEmail());
-        stmtBuilder.add("MAINPHONE", patient.getPhoneNum());
-        stmtBuilder.add("INSURANCE", patient.getInsurance());
-        stmtBuilder.add("BALANCE", patient.getBalance());
-        stmtBuilder.add("BIRTH_DATE", patient.getBirthDate());
+        stmtBuilder.add(patient);
         QueryRunner.execQuery(stmtBuilder.generateStmt());
+        return true;
+    }
+    
+    public static boolean updatePatient(Patient patient) {
+        if (!patientExists(patient.getID())) {
+            return false;
+        }
+        UpdateStmtBuilder stmtBuilder = new UpdateStmtBuilder(PATIENT_TABLE_NAME);
+        stmtBuilder.add(patient);
+        stmtBuilder.addCondition("ID", patient.getID());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
+        return true;
+    }
+    
+    public static void save(Patient patient) {
+        if (!insertPatient(patient)) {
+            updatePatient(patient);
+        }
+    }
+    
+    public static boolean chargePatient(int patientID, float chargeAmnt) {
+        Patient p = getPatient(patientID);
+        if (p == null) {
+            return false;
+        }
+        p.setBalance(p.getBalance() + chargeAmnt);
+        save(p);
+        return true;
+    }
+    
+    public static boolean payBalance(int patientID, float paymentAmnt) {
+        Patient p = getPatient(patientID);
+        if (p == null) {
+            return false;
+        }
+        p.setBalance(p.getBalance() - paymentAmnt);
+        save(p);
         return true;
     }
     
@@ -155,15 +194,18 @@ public class Database {
             return false;
         }
         InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(MEDINFO_TABLE_NAME);
-        if (medInfo.getID() >= 0) {
-            stmtBuilder.add("ID", medInfo.getID());
-        }
-        stmtBuilder.add("ID", medInfo.getID());
-        stmtBuilder.add("NAME", medInfo.getName());
-        stmtBuilder.add("USAGE", medInfo.getUsage());
-        stmtBuilder.add("DESCRIPTION", medInfo.getDescription());
-        stmtBuilder.add("SIDE_EFFECTS", medInfo.getSideEffects());
+        stmtBuilder.add(medInfo);
         QueryRunner.execQuery(stmtBuilder.generateStmt());
+        return true;
+    }
+    
+    public static boolean updateMedInfo(MedInfo medInfo) {
+        if (!medInfoExists(medInfo.getID())) {
+            return false;
+        }
+        UpdateStmtBuilder stmtBuilder = new UpdateStmtBuilder(MEDINFO_TABLE_NAME);
+        stmtBuilder.add(medInfo);
+        stmtBuilder.addCondition("ID", medInfo.getID());
         return true;
     }
     
@@ -194,25 +236,45 @@ public class Database {
         return QueryRunner.prescriptionQuery(stmtBuilder.generateStmt()).size() > 0;
     }
     
+    public static boolean deletePrescription(int apptID, int patientID) {
+        if (!prescriptionExists(apptID, patientID)) {
+            return false;
+        }
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(STAFF_TABLE_NAME);
+        stmtBuilder.add("APPT_ID", apptID);
+        stmtBuilder.add("PATIENT_ID", patientID);
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
+        return true;
+    }
+    
     public static boolean insertPrescription(Prescription p) {
         if (prescriptionExists(p.getAppointmentID(), p.getPatientID())) {
             return false;
         }
         InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(RX_TABLE_NAME);
-        stmtBuilder.add("APPT_ID", p.getAppointmentID());
-        stmtBuilder.add("MED_ID", p.getMedID());
-        stmtBuilder.add("STAFF_ID", p.getStaffID());
-        stmtBuilder.add("PATIENT_ID", p.getPatientID());
-        stmtBuilder.add("DOSES", p.getDoses());
-        stmtBuilder.add("DOSE_AMNT", p.getDosage().getAmount());
-        stmtBuilder.add("DOSE_UNIT", p.getDosage().getUnit());
-        stmtBuilder.add("FREQ_AMNT", p.getFreq().getCount());
-        stmtBuilder.add("FREQ_UNIT", p.getFreq().getTimeUnit());
-        stmtBuilder.add("REFILLS", p.getRefills());
-        stmtBuilder.add("DATE", p.getDate());
+        stmtBuilder.add(p);
         QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
+    
+    public static boolean updatePrescription(Prescription p) {
+        if (!prescriptionExists(p.getAppointmentID(), p.getPatientID())) {
+            return false;
+        }
+        UpdateStmtBuilder stmtBuilder = new UpdateStmtBuilder(RX_TABLE_NAME);
+        stmtBuilder.add(p);
+        stmtBuilder.addCondition("APPT_ID", p.getAppointmentID());
+        stmtBuilder.addCondition("PATIENT_ID", p.getPatientID());
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
+        return true;
+    }
+    
+    public static void save(Prescription p) {
+        if (!insertPrescription(p)) {
+            updatePrescription(p);
+        }
+    }
+    
     
     
     // STAFF TABLE INTERFACE
@@ -237,78 +299,44 @@ public class Database {
         return searchStaff("ID", staffID).size() > 0;
     }
     
+    public static boolean deleteStaff(int staffID) {
+        if (!staffExists(staffID)) {
+            return false;
+        }
+        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(STAFF_TABLE_NAME);
+        stmtBuilder.add("ID", staffID);
+        QueryRunner.execQuery(stmtBuilder.generateStmt());
+        return true;
+    }
+    
     public static boolean insertStaff(Staff staff) {
         if (staffExists(staff.getID())) {
             return false;
         }
         InsertStmtBuilder stmtBuilder = new InsertStmtBuilder(STAFF_TABLE_NAME);
-        if (staff.getID() >= 0) {
-            stmtBuilder.add("ID", staff.getID());
-        }
-        stmtBuilder.add("ACCESSLVL", staff.getAccessLevel());
-        stmtBuilder.add("USERNAME", staff.getUsername());
-        stmtBuilder.add("PASSWORD", staff.getPassword());
-        stmtBuilder.add("FIRSTNAME", staff.getFirstName());
-        stmtBuilder.add("LASTNAME", staff.getLastName());
-        stmtBuilder.add("BIRTH_DATE", staff.getBirthDate());
-        stmtBuilder.add("HIRE_DATE", staff.getHireDate());
+        stmtBuilder.add(staff);
         QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
 
-    
-    public static  boolean deleteMedInfo(MedInfo medInfo) {
-        return deleteMedInfo(medInfo.getID());
-    }
-    
-    public static boolean deletePrescription(int apptID, int patientID) {
-        if (!prescriptionExists(apptID, patientID)) {
+    public static boolean updateStaff(Staff staff) {
+        if (!staffExists(staff.getID())) {
             return false;
         }
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(RX_TABLE_NAME);
-        stmtBuilder.add("APPT_ID", apptID);
-        stmtBuilder.add("PATIENT_ID", patientID);
+        UpdateStmtBuilder stmtBuilder = new UpdateStmtBuilder(STAFF_TABLE_NAME);
+        stmtBuilder.add(staff);
+        stmtBuilder.addCondition("ID", staff.getID());
         QueryRunner.execQuery(stmtBuilder.generateStmt());
         return true;
     }
     
-    public static boolean deletePrescription(Prescription p) {
-        return deletePrescription(p.getAppointmentID(), p.getPatientID());
-    }
-    
-    public static void deleteStaff(String key, String value) {
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(STAFF_TABLE_NAME);
-        stmtBuilder.add(key, value);
-        QueryRunner.execQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static void deleteStaff(String key, int value) {
-        DeleteStmtBuilder stmtBuilder = new DeleteStmtBuilder(STAFF_TABLE_NAME);
-        stmtBuilder.add(key, value);
-        QueryRunner.execQuery(stmtBuilder.generateStmt());
-    }
-    
-    public static boolean deleteStaff(int staffID) {
-        if (!staffExists(staffID)) {
-            return false;
+    public static void save(Staff staff) {
+        if (!insertStaff(staff)) {
+            updateStaff(staff);
         }
-        deleteStaff("ID", staffID);
-        return true;
-    }
-
-    public static boolean deleteStaff(Staff staff) {
-        return deleteStaff(staff.getID());
     }
     
-    // TODO throwaway when more generic methods realized
-    public static float setBalance(int patientID, float newBalance) {
-        String updateQuery = "UPDATE `" + PATIENT_TABLE_NAME + "` SET `BALANCE` = ";
-        updateQuery += String.valueOf(newBalance);
-        updateQuery += " WHERE `ID` = " + String.valueOf(patientID);
-        QueryRunner.execQuery(updateQuery);
-        if (patientExists(patientID)) {
-            return searchPatients("ID", patientID).get(0).getBalance();
-        }
-        return -1;
+    public static ArrayList<Staff> getDoctors() {
+        return searchStaff("ACCESSLVL", 1);
     }
 }
