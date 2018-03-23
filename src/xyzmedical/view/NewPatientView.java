@@ -184,7 +184,6 @@ public class NewPatientView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitPatientInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPatientInformationButtonActionPerformed
-        int ID = -1;
         int pcp = -1; // TODO get primary care provider number if applicable, default to -1 if not
         float balance = (float) 0.0;
         Date dob = this.parseBirthDate();
@@ -196,7 +195,7 @@ public class NewPatientView extends javax.swing.JFrame {
         String phone = phoneTextField.getText();
         String insurance = insuranceTextField.getText();
         
-        NewPatientViewController.insertNewPatient(ID, firstName, lastName, 
+        NewPatientViewController.insertNewPatient(firstName, lastName, 
                 username, password, pcp, balance, email, 
                 phone, insurance, dob);
         

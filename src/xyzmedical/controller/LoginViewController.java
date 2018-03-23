@@ -3,49 +3,33 @@ package xyzmedical.controller;
 import java.util.ArrayList;
 
 import xyzmedical.model.Staff;
-import xyzmedical.model.Patient;
+import xyzmedical.model.Person;
 import xyzmedical.db.Database;
 /**
  *
  * @author christian
  */
 public class LoginViewController {
-    public static int login(String userName, String userPassword) {
-        ArrayList<Staff> staffList = Database.searchStaff("USERNAME", userName);
-        ArrayList<Patient> patientList = Database.searchPatients("USERNAME", userName);
-
-        if (staffList.size() == 0 && patientList.size() == 0) {
-            return -1;
-        }
-        
-        for (Staff staffMember : staffList) {
-            if (staffMember.passwordMatches(userPassword)) {
-                return staffMember.getAccessLevel();
-            }
-        }
-        
-        for (Patient patient : patientList) {
-            if (patient.passwordMatches(userPassword)) {
-                return 0;
-            }
-        }
-        return 88;
+    private static Person userPerson;
+    
+    public LoginViewController() {
+        userPerson = null;
     }
     
-    public static int getUID(String uname) {
-        ArrayList<Staff> staffList = Database.searchStaff("USERNAME", uname);
-        for (Staff staffMember : staffList) {
-            if (staffMember.getUsername().equals(uname)) {
-                return staffMember.getID();
-            }
-        }
-        
-        ArrayList<Patient> patientList = Database.searchPatients("USERNAME", uname);
-        for (Patient patient : patientList) {
-            if (patient.getUsername().equals(uname)) {
-                return patient.getID();
-            }
-        }
-        return -1;
+    public static boolean login(String userName, String userPassword) {
+        userPerson = Database.login(userName, userPassword);
+        return userPerson != null;
+    }
+    
+    public static boolean isUserStaff() {
+        return Database.staffExists(userPerson.getID());
+    }
+    
+    public static boolean isUserPatient() {
+        return Database.patientExists(userPerson.getID());
+    }
+    
+    public static int userID() {
+        return userPerson.getID();
     }
 }

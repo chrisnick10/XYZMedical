@@ -2,6 +2,7 @@ package xyzmedical.view;
 
 import javax.swing.JOptionPane;
 import xyzmedical.controller.LoginViewController;
+import xyzmedical.model.Person;
 
 /**
  *
@@ -123,25 +124,17 @@ public class LoginView extends javax.swing.JFrame {
         String uname = usernameTextField.getText();
         String upass = passwordTextField.getText();
 
-        int loginResponse = LoginViewController.login(uname, upass);
-        int uid = LoginViewController.getUID(uname);
-        switch(loginResponse) {
-            case 1: case 2: case 3: case4:
-                System.out.println("Staff member has logged on");
+        if (LoginViewController.login(uname, upass)) {
+            if (LoginViewController.isUserStaff()) {
                 this.dispose();
-                StaffView sView = new StaffView(uid, uname, upass);
+                StaffView sView = new StaffView(LoginViewController.userID(), uname, upass);
                 sView.setVisible(true);
-                break;
-            case 0:
-                System.out.println("Patient has logged on");
+            } else if (LoginViewController.isUserPatient()) {
                 this.dispose();
-                PatientView pView = new PatientView(uid);
+                PatientView pView = new PatientView(LoginViewController.userID());
                 pView.setVisible(true);
-                break;
-            default:
-                System.out.println("Invalid username or password");
-                JOptionPane.showMessageDialog(null, "Invalid username or password");
-        };
+            }
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed

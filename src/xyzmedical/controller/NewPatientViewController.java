@@ -12,12 +12,12 @@ import static xyzmedical.util.HttpConnection.HttpConnection;
  */
 public class NewPatientViewController {
     
-    public static void insertNewPatient(int ID, String firstName, 
+    public static void insertNewPatient(String firstName, 
             String lastName, String username, String password, 
             int primaryCareProvider, float balance, String email, 
             String phoneNum, String insurance, Date birthDate) {
         
-        Patient p = new Patient(ID, firstName, lastName, username, password, 
+        Patient p = new Patient(-1, firstName, lastName, username, password, 
                 primaryCareProvider, balance, email, phoneNum, insurance, 
                 birthDate);
     }

@@ -175,6 +175,14 @@ public class Database {
         return QueryRunner.medinfoQuery(stmtBuilder.generateStmt());
     }
     
+    public static MedInfo getMedInfo(int medID) {
+        ArrayList<MedInfo> medInfo = searchMedInfo("ID", medID);
+        if (medInfo.size() == 1) {
+            return medInfo.get(0);
+        }
+        return null;
+    }
+    
     public static boolean medInfoExists(int medID) {
         return searchMedInfo("ID", medID).size() > 0;
     }
@@ -226,6 +234,13 @@ public class Database {
     public static ArrayList<Prescription> searchPrescriptions(String key, String value) {
         SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(RX_TABLE_NAME);
         stmtBuilder.add(key, value);
+        return QueryRunner.prescriptionQuery(stmtBuilder.generateStmt());
+    }
+    
+    public static ArrayList<Prescription> getApptPrescription(int apptID, int patientID) {
+        SelectStmtBuilder stmtBuilder = new SelectStmtBuilder(RX_TABLE_NAME);
+        stmtBuilder.add("APPT_ID", apptID);
+        stmtBuilder.add("PATIENT_ID", patientID);
         return QueryRunner.prescriptionQuery(stmtBuilder.generateStmt());
     }
     
@@ -295,10 +310,18 @@ public class Database {
         return QueryRunner.staffQuery(stmtBuilder.generateStmt());
     }
 
+    public static Staff getStaff(int staffID) {
+        ArrayList<Staff> staff = searchStaff("ID", staffID);
+        if (staff.size() == 1) {
+            return staff.get(0);
+        }
+        return null;
+    }
+    
     public static boolean staffExists(int staffID) {
         return searchStaff("ID", staffID).size() > 0;
     }
-    
+
     public static boolean deleteStaff(int staffID) {
         if (!staffExists(staffID)) {
             return false;
@@ -338,5 +361,24 @@ public class Database {
     
     public static ArrayList<Staff> getDoctors() {
         return searchStaff("ACCESSLVL", 1);
+    }
+    
+    public static Person login(String username, String password) {
+        SelectStmtBuilder staffStmtBuilder = new SelectStmtBuilder(STAFF_TABLE_NAME);
+        staffStmtBuilder.add("USERNAME", username);
+        staffStmtBuilder.add("PASSWORD", password);
+        ArrayList<Staff> staff = QueryRunner.staffQuery(staffStmtBuilder.generateStmt());
+        if (staff.size() == 1) {
+            return staff.get(0);
+        }
+        
+        SelectStmtBuilder patientStmtBuilder = new SelectStmtBuilder(PATIENT_TABLE_NAME);
+        patientStmtBuilder.add("USERNAME", username);
+        patientStmtBuilder.add("PASSWORD", password);
+        ArrayList<Patient> patients = QueryRunner.patientQuery(patientStmtBuilder.generateStmt());
+        if (patients.size() == 1) {
+            return patients.get(0);
+        }
+        return null;
     }
 }
