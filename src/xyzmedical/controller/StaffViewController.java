@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
 import xyzmedical.model.Staff;
+import xyzmedical.utilities.HttpConnection;
 import static xyzmedical.utilities.HttpConnection.HttpConnection;
 
 /**
@@ -17,6 +18,22 @@ import static xyzmedical.utilities.HttpConnection.HttpConnection;
  */
 public class StaffViewController {
     
+    
+    public static boolean isLabTech(int U_ID) {
+        
+        try {
+            
+            String q = "SELECT AccessLevel FROM STAFF WHERE U_ID = " + U_ID + ";";
+            
+            JSONArray jsonA = new JSONArray(HttpConnection.HttpConnection(q));
+            
+            return jsonA.getJSONObject(0).getString("AccessLevel").equals("5");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     
     public static boolean isNewStaff(int U_ID) {
         

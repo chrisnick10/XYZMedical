@@ -25,6 +25,9 @@ public class StaffView extends javax.swing.JFrame {
         enterStaffInfoButton.setVisible(
                 StaffViewController.isNewStaff(P_ID)
         );
+        enter_test_results.setVisible(
+                StaffViewController.isLabTech(p_id)
+        );
     }
 
     /**
@@ -43,6 +46,7 @@ public class StaffView extends javax.swing.JFrame {
         enterStaffInfoButton = new javax.swing.JButton();
         chargePatientButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
+        enter_test_results = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,23 +95,33 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        enter_test_results.setText("Enter Test Results");
+        enter_test_results.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enter_test_resultsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(restockMed, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(staffLabel)
-                    .addComponent(scheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(enterStaffInfoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chargePatientButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(245, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logoutButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(logoutButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(restockMed, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(staffLabel)
+                            .addComponent(scheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(enterStaffInfoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chargePatientButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(enter_test_results, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 295, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -125,7 +139,9 @@ public class StaffView extends javax.swing.JFrame {
                 .addComponent(enterStaffInfoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chargePatientButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(enter_test_results)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(logoutButton))
         );
 
@@ -174,6 +190,13 @@ public class StaffView extends javax.swing.JFrame {
         lView.setVisible(true);
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    private void enter_test_resultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enter_test_resultsActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        EnterTestResultsView view = new EnterTestResultsView(P_ID);
+        view.setVisible(true);
+    }//GEN-LAST:event_enter_test_resultsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,6 +236,7 @@ public class StaffView extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton chargePatientButton;
     private javax.swing.JButton enterStaffInfoButton;
+    private javax.swing.JButton enter_test_results;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton restockMed;
     private javax.swing.JButton scheduleButton;
