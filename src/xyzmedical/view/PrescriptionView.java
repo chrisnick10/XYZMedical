@@ -7,8 +7,7 @@ package xyzmedical.view;
 
 import java.util.List;
 import xyzmedical.view.StaffView;
-import xyzmedical.controller.AppointmentViewController;
-import xyzmedical.controller.AppointmentViewController;
+import xyzmedical.controller.PrescriptionViewController;
 /**
  *
  * @author nhine
@@ -20,12 +19,12 @@ public class PrescriptionView extends javax.swing.JFrame {
      */
     public PrescriptionView() {
         initComponents();
-        List<String> patients = AppointmentViewController.getPatientList();
+        List<String> patients = PrescriptionViewController.getPatientList();
         String[] pList = new String[patients.size()];
         patients.toArray(pList);
         patientList.setListData(pList);
         
-        List<String> medications = AppointmentViewController.getMedicationList();
+        List<String> medications = PrescriptionViewController.getMedicationList();
         String[] mList = new String[medications.size()];
         medications.toArray(mList);
         medicationList.setListData(mList);
