@@ -43,12 +43,11 @@ public class AppointmentView extends javax.swing.JFrame {
         reasonLabel = new javax.swing.JLabel();
         patientLabel = new javax.swing.JLabel();
         patientTextField = new javax.swing.JTextField();
-        doctorDdl = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         apptLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        apptLabel.setText("Appointment");
+        apptLabel.setText("Schedule Appointment");
 
         dateLabel.setText("Appointment Date:");
 
@@ -71,8 +70,6 @@ public class AppointmentView extends javax.swing.JFrame {
 
         patientLabel.setText("Patient Name:");
 
-        doctorDdl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,15 +88,12 @@ public class AppointmentView extends javax.swing.JFrame {
                                 .addComponent(cancelButton))
                             .addComponent(reasonLabel)
                             .addComponent(patientLabel)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(patientTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dateTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(doctorTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(doctorLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(54, 54, 54)
-                                .addComponent(doctorDdl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(patientTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(dateTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(doctorTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(doctorLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 228, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -118,9 +112,7 @@ public class AppointmentView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(doctorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(doctorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doctorDdl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(doctorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(reasonLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -193,7 +185,6 @@ public class AppointmentView extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JTextField dateTextField;
-    private javax.swing.JComboBox<String> doctorDdl;
     private javax.swing.JLabel doctorLabel;
     private javax.swing.JTextField doctorTextField;
     private javax.swing.JScrollPane jScrollPane1;

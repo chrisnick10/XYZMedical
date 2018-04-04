@@ -47,6 +47,7 @@ public class StaffView extends javax.swing.JFrame {
         chargePatientButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         enter_test_results = new javax.swing.JButton();
+        prescribeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +103,13 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        prescribeButton.setText("Prescribe Medication");
+        prescribeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prescribeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,7 +128,8 @@ public class StaffView extends javax.swing.JFrame {
                             .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(enterStaffInfoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(chargePatientButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(enter_test_results, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(enter_test_results, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(prescribeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 295, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -133,15 +142,17 @@ public class StaffView extends javax.swing.JFrame {
                 .addComponent(scheduleButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelButton)
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(prescribeButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(restockMed)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enterStaffInfoButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chargePatientButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enter_test_results)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
                 .addComponent(logoutButton))
         );
 
@@ -197,6 +208,13 @@ public class StaffView extends javax.swing.JFrame {
         view.setVisible(true);
     }//GEN-LAST:event_enter_test_resultsActionPerformed
 
+    private void prescribeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prescribeButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        PrescriptionView view = new PrescriptionView();
+        view.setVisible(true);
+    }//GEN-LAST:event_prescribeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,6 +256,7 @@ public class StaffView extends javax.swing.JFrame {
     private javax.swing.JButton enterStaffInfoButton;
     private javax.swing.JButton enter_test_results;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JButton prescribeButton;
     private javax.swing.JButton restockMed;
     private javax.swing.JButton scheduleButton;
     private javax.swing.JLabel staffLabel;

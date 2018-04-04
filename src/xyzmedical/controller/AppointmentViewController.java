@@ -138,4 +138,24 @@ public class AppointmentViewController {
             return pList;
         }
     }
+    
+    public static List<String> getMedicationList(){
+        try {
+            String apptListQuery = "SELECT MedicationName FROM MEDICATION";
+            String apptList = HttpConnection(apptListQuery);
+            JSONArray jsonArr = new JSONArray(apptList);
+            List<String> aList = new ArrayList<String>();
+            
+            for (int i = 0; i < jsonArr.length(); i++) {
+                String name = jsonArr.getJSONObject(i).getString("MedicationName");
+                aList.add(name);
+            }
+            
+            return aList;
+        } catch (Exception ex) {
+            Logger.getLogger(AppointmentViewController.class.getName()).log(Level.SEVERE, null, ex);
+            List<String> pList = new ArrayList<String>();
+            return pList;
+        }
+    }
 }

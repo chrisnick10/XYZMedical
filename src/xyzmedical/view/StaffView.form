@@ -39,6 +39,7 @@
                           <Component id="enterStaffInfoButton" max="32767" attributes="0"/>
                           <Component id="chargePatientButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="enter_test_results" max="32767" attributes="0"/>
+                          <Component id="prescribeButton" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="295" max="32767" attributes="0"/>
                   </Group>
@@ -56,15 +57,17 @@
               <Component id="scheduleButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="prescribeButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
               <Component id="restockMed" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="enterStaffInfoButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="chargePatientButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="enter_test_results" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -133,6 +136,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enter_test_resultsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="prescribeButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prescribe Medication"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prescribeButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
