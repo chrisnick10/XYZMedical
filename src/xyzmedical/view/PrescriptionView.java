@@ -5,29 +5,40 @@
  */
 package xyzmedical.view;
 
-import java.util.List;
-import xyzmedical.view.StaffView;
+import org.json.JSONArray;
 import xyzmedical.controller.PrescriptionViewController;
 /**
  *
- * @author nhine
+ * @author nhine, smudigere
  */
 public class PrescriptionView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PrescriptionView
-     */
-    public PrescriptionView() {
+    private static int S_ID;
+    private JSONArray patientArray, medicationArray;
+    
+    public PrescriptionView(int s_id) {
         initComponents();
-        List<String> patients = PrescriptionViewController.getPatientList();
-        String[] pList = new String[patients.size()];
-        patients.toArray(pList);
-        patientList.setListData(pList);
+        S_ID = s_id;
+        try {
         
-        List<String> medications = PrescriptionViewController.getMedicationList();
-        String[] mList = new String[medications.size()];
-        medications.toArray(mList);
-        medicationList.setListData(mList);
+        medicationArray = PrescriptionViewController.getMedicationList();
+        String[] pList = new String[medicationArray.length()];
+        
+        for (int i = 0; i < medicationArray.length(); i++)
+            pList[i] = medicationArray.getJSONObject(i).getString("NAME");
+            
+        medicationList.setListData(pList);
+
+        patientArray = PrescriptionViewController.getPatientList();
+        String[] pList1 = new String[patientArray.length()];
+        
+        for (int i = 0; i < patientArray.length(); i++)
+            pList1[i] = patientArray.getJSONObject(i).getString("PFNAME") + " " +
+                            patientArray.getJSONObject(i).getString("PLNAME");
+            
+        patientList.setListData(pList1);
+        
+        } catch (Exception ignored) {}
     }
 
     /**
@@ -98,11 +109,11 @@ public class PrescriptionView extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(confirmButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -110,27 +121,28 @@ public class PrescriptionView extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(prescriptionAmountTextBox, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(prescriptionAmountTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmButton)
                     .addComponent(cancelButton))
@@ -142,9 +154,21 @@ public class PrescriptionView extends javax.swing.JFrame {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        /*this.dispose();
         StaffView nextView = new StaffView(1);
-        nextView.setVisible(true);
+        nextView.setVisible(true);*/
+        
+        try {
+        
+        this.dispose();
+        PrescriptionViewController.enterPrescriptionInfo(S_ID,
+                patientArray.getJSONObject(patientList.getSelectedIndex()).getInt("P_ID"),
+                medicationArray.getJSONObject(medicationList.getSelectedIndex()).getInt("M_ID"),
+                Integer.parseInt(prescriptionAmountTextBox.getText()));
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -188,7 +212,7 @@ public class PrescriptionView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrescriptionView().setVisible(true);
+                new PrescriptionView(S_ID).setVisible(true);
             }
         });
     }
