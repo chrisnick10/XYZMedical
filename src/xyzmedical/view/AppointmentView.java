@@ -55,6 +55,7 @@ public class AppointmentView extends javax.swing.JFrame {
 
         doctorLabel.setText("Appointment Doctor:");
 
+        submitButton.setForeground(new java.awt.Color(204, 0, 51));
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +63,7 @@ public class AppointmentView extends javax.swing.JFrame {
             }
         });
 
+        cancelButton.setForeground(new java.awt.Color(204, 0, 51));
         cancelButton.setText("Cancel");
 
         reasonTextField.setColumns(20);
