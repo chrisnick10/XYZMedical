@@ -18,6 +18,21 @@ import static xyzmedical.utilities.HttpConnection.HttpConnection;
  */
 public class StaffViewController {
     
+    public static boolean isStaffDoc(int U_ID) {
+        
+        try {
+            
+            String q = "SELECT AccessLevel FROM STAFF WHERE U_ID = " + U_ID + ";";
+            
+            JSONArray jsonA = new JSONArray(HttpConnection.HttpConnection(q));
+            
+            return jsonA.getJSONObject(0).getString("AccessLevel").equals("1");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     
     public static boolean isLabTech(int U_ID) {
         

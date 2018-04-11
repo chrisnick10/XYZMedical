@@ -49,9 +49,15 @@ public class PrescriptionViewController {
         public static void enterPrescriptionInfo(int s_id, int p_id, int m_id, int dosage) {
         
         try {
+            
+            String getPID = "SELECT S_ID FROM STAFF WHERE U_ID = " + s_id;
+            
+            String result = HttpConnection(getPID);
+            System.out.println(result);
+            JSONArray jsonA = new JSONArray(result);
          
             String insertQ = String.format("INSERT INTO PRESCRIPTIONS(`Rx_ID`, `S_ID`, `P_ID`, `M_ID`, `DOSAGE`) VALUES (NULL, '%d', '%d', '%d', '%d');",
-                    s_id, p_id, m_id, dosage);
+                    jsonA.getJSONObject(0).getInt("S_ID"), p_id, m_id, dosage);
             System.out.println(insertQ);
             System.out.println(HttpConnection(insertQ));
             

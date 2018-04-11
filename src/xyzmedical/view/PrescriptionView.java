@@ -171,12 +171,14 @@ public class PrescriptionView extends javax.swing.JFrame {
         
         try {
         
-        this.dispose();
         PrescriptionViewController.enterPrescriptionInfo(S_ID,
                 patientArray.getJSONObject(patientList.getSelectedIndex()).getInt("P_ID"),
                 medicationArray.getJSONObject(medicationList.getSelectedIndex()).getInt("M_ID"),
                 Integer.parseInt(prescriptionAmountTextBox.getText()));
         
+        this.dispose();
+        StaffView sv = new StaffView(S_ID);
+        sv.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
