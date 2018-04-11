@@ -45,6 +45,7 @@ public class RegisterView extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(250, 333));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Register User");
 
@@ -52,6 +53,7 @@ public class RegisterView extends javax.swing.JFrame {
 
         jLabel2.setText("Username");
 
+        submitButton.setForeground(new java.awt.Color(204, 0, 51));
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +110,7 @@ public class RegisterView extends javax.swing.JFrame {
                 .addComponent(userTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(submitButton)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
