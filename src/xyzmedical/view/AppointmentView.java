@@ -65,6 +65,11 @@ public class AppointmentView extends javax.swing.JFrame {
 
         cancelButton.setForeground(new java.awt.Color(204, 0, 51));
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         reasonTextField.setColumns(20);
         reasonTextField.setRows(5);
@@ -146,6 +151,13 @@ public class AppointmentView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "This doctor is not available on this date.");
         }
     }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        StaffView sv = new StaffView(0);
+        sv.setVisible(true);
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
