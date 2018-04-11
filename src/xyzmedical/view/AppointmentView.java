@@ -46,7 +46,9 @@ public class AppointmentView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        apptLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        apptLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        apptLabel.setForeground(new java.awt.Color(204, 0, 51));
+        apptLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         apptLabel.setText("Schedule Appointment");
 
         dateLabel.setText("Appointment Date:");
@@ -80,7 +82,6 @@ public class AppointmentView extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(apptLabel)
                             .addComponent(dateLabel)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(submitButton)
@@ -88,20 +89,20 @@ public class AppointmentView extends javax.swing.JFrame {
                                 .addComponent(cancelButton))
                             .addComponent(reasonLabel)
                             .addComponent(patientLabel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(patientTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(dateTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(doctorTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(doctorLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 228, Short.MAX_VALUE)))
+                            .addComponent(doctorLabel))
+                        .addGap(0, 228, Short.MAX_VALUE))
+                    .addComponent(apptLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(patientTextField)
+                    .addComponent(dateTextField)
+                    .addComponent(doctorTextField))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(apptLabel)
-                .addGap(18, 18, 18)
+                .addComponent(apptLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(patientLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(patientTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,7 +114,7 @@ public class AppointmentView extends javax.swing.JFrame {
                 .addComponent(doctorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(doctorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(reasonLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

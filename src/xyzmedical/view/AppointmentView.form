@@ -29,7 +29,6 @@
                   <Component id="jScrollPane1" pref="385" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="apptLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="dateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="submitButton" min="-2" max="-2" attributes="0"/>
@@ -38,15 +37,14 @@
                           </Group>
                           <Component id="reasonLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="patientLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="patientTextField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="dateTextField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="doctorTextField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="doctorLabel" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="doctorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="228" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="apptLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="patientTextField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="dateTextField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="doctorTextField" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -56,8 +54,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="apptLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="apptLabel" min="-2" pref="34" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="patientLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="patientTextField" min="-2" max="-2" attributes="0"/>
@@ -69,7 +67,7 @@
               <Component id="doctorLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="doctorTextField" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
               <Component id="reasonLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -87,8 +85,12 @@
     <Component class="javax.swing.JLabel" name="apptLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="1"/>
+          <Font name="Tahoma" size="18" style="1"/>
         </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Schedule Appointment"/>
       </Properties>
     </Component>
