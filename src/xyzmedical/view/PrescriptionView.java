@@ -185,7 +185,7 @@ public class PrescriptionView extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        StaffView sv = new StaffView(0);
+        StaffView sv = new StaffView(S_ID);
         sv.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 

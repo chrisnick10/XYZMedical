@@ -41,7 +41,7 @@ public class EnterTestResultsView extends javax.swing.JFrame {
         submit_button = new javax.swing.JButton();
         cancel_button = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 51));

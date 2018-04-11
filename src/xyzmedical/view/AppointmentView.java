@@ -44,7 +44,7 @@ public class AppointmentView extends javax.swing.JFrame {
         patientLabel = new javax.swing.JLabel();
         patientTextField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         apptLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         apptLabel.setForeground(new java.awt.Color(204, 0, 51));

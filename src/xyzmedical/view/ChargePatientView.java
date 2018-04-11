@@ -42,7 +42,7 @@ public class ChargePatientView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         patientUserNameTextField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 200));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
