@@ -76,6 +76,7 @@ public class PatientView extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Patient");
 
+        enterPatientInfoButton.setForeground(new java.awt.Color(204, 0, 51));
         enterPatientInfoButton.setText("Enter Patient Information");
         enterPatientInfoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +130,7 @@ public class PatientView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        payBalanceButton.setForeground(new java.awt.Color(204, 0, 51));
         payBalanceButton.setText("Pay Balance");
         payBalanceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +138,7 @@ public class PatientView extends javax.swing.JFrame {
             }
         });
 
+        testresult_button.setForeground(new java.awt.Color(204, 0, 51));
         testresult_button.setText("Test Results");
         testresult_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +146,7 @@ public class PatientView extends javax.swing.JFrame {
             }
         });
 
+        logoutButton.setForeground(new java.awt.Color(204, 0, 51));
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -56,6 +56,7 @@ public class StaffView extends javax.swing.JFrame {
         staffLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         staffLabel.setText("Staff Portal");
 
+        scheduleButton.setForeground(new java.awt.Color(204, 0, 51));
         scheduleButton.setText("Schedule Appointment");
         scheduleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +64,7 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        cancelButton.setForeground(new java.awt.Color(204, 0, 51));
         cancelButton.setText("Cancel Appointment");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +72,7 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        restockMed.setForeground(new java.awt.Color(204, 0, 51));
         restockMed.setText("Restock Medication");
         restockMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +80,7 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        enterStaffInfoButton.setForeground(new java.awt.Color(204, 0, 51));
         enterStaffInfoButton.setText("Enter Staff Information");
         enterStaffInfoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +88,7 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        chargePatientButton.setForeground(new java.awt.Color(204, 0, 51));
         chargePatientButton.setText("Charge Patient Account");
         chargePatientButton.setPreferredSize(new java.awt.Dimension(185, 29));
         chargePatientButton.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +97,7 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        logoutButton.setForeground(new java.awt.Color(204, 0, 51));
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +105,7 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        enter_test_results.setForeground(new java.awt.Color(204, 0, 51));
         enter_test_results.setText("Enter Test Results");
         enter_test_results.setMaximumSize(new java.awt.Dimension(185, 29));
         enter_test_results.setMinimumSize(new java.awt.Dimension(185, 29));
@@ -109,6 +116,7 @@ public class StaffView extends javax.swing.JFrame {
             }
         });
 
+        prescribeButton.setForeground(new java.awt.Color(204, 0, 51));
         prescribeButton.setText("Prescribe Medication");
         prescribeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,11 +145,13 @@ public class StaffView extends javax.swing.JFrame {
                                     .addComponent(enterStaffInfoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(restockMed, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(enter_test_results, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(logoutButton, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addGap(0, 323, Short.MAX_VALUE)
+                                .addComponent(logoutButton)))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(enter_test_results, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,12 +167,12 @@ public class StaffView extends javax.swing.JFrame {
                     .addComponent(cancelButton)
                     .addComponent(enterStaffInfoButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(prescribeButton)
-                    .addComponent(chargePatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(enter_test_results, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chargePatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(enter_test_results, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(logoutButton))
         );
 

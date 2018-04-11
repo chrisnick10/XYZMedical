@@ -43,16 +43,18 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="enter_test_results" alignment="1" min="-2" pref="191" max="-2" attributes="0"/>
-                                  <Component id="logoutButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="0" pref="323" max="32767" attributes="0"/>
+                              <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="enter_test_results" min="-2" pref="191" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,13 +74,13 @@
                   <Component id="enterStaffInfoButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="prescribeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="chargePatientButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="prescribeButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="chargePatientButton" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="enter_test_results" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="enter_test_results" min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -99,6 +101,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="scheduleButton">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Schedule Appointment"/>
       </Properties>
       <Events>
@@ -107,6 +112,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancel Appointment"/>
       </Properties>
       <Events>
@@ -115,6 +123,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="restockMed">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Restock Medication"/>
       </Properties>
       <Events>
@@ -123,6 +134,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="enterStaffInfoButton">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Enter Staff Information"/>
       </Properties>
       <Events>
@@ -131,6 +145,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="chargePatientButton">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Charge Patient Account"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[185, 29]"/>
@@ -142,6 +159,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="logoutButton">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
       <Events>
@@ -150,6 +170,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="enter_test_results">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Enter Test Results"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[185, 29]"/>
@@ -167,6 +190,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="prescribeButton">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Prescribe Medication"/>
       </Properties>
       <Events>

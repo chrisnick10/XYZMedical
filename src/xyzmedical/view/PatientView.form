@@ -78,6 +78,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="enterPatientInfoButton">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Enter Patient Information"/>
       </Properties>
       <Events>
@@ -164,6 +167,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="payBalanceButton">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pay Balance"/>
       </Properties>
       <Events>
@@ -172,6 +178,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="testresult_button">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Test Results"/>
       </Properties>
       <Events>
@@ -180,6 +189,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="logoutButton">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
       <Events>
