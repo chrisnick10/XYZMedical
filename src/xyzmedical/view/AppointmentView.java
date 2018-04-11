@@ -14,11 +14,14 @@ import javax.swing.JOptionPane;
  * @author nhine
  */
 public class AppointmentView extends javax.swing.JFrame {
+    
+    public static int U_ID;
 
     /**
      * Creates new form AppointmentView
      */
-    public AppointmentView() {
+    public AppointmentView(int u_id) {
+        U_ID = u_id;
         initComponents();
     }
 
@@ -144,7 +147,7 @@ public class AppointmentView extends javax.swing.JFrame {
         
         if(AppointmentViewController.schedule(date, doctor, patient, reason)){
             this.dispose();
-            StaffView nextView = new StaffView(1);
+            StaffView nextView = new StaffView(U_ID);
             nextView.setVisible(true);
         }
         else{
@@ -155,7 +158,7 @@ public class AppointmentView extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        StaffView sv = new StaffView(0);
+        StaffView sv = new StaffView(U_ID);
         sv.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -189,7 +192,7 @@ public class AppointmentView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppointmentView().setVisible(true);
+                new AppointmentView(U_ID).setVisible(true);
                 AppointmentViewController.getDoctorList();
             }
         });

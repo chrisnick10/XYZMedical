@@ -193,14 +193,14 @@ public class StaffView extends javax.swing.JFrame {
     private void scheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        AppointmentView av = new AppointmentView();
+        AppointmentView av = new AppointmentView(P_ID);
         av.setVisible(true);
     }//GEN-LAST:event_scheduleButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        CancelView cv = new CancelView();
+        CancelView cv = new CancelView(P_ID);
         cv.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
