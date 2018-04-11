@@ -42,7 +42,6 @@ public class LoginView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(250, 300));
         setMinimumSize(new java.awt.Dimension(250, 300));
-        setPreferredSize(new java.awt.Dimension(250, 300));
         setResizable(false);
         setSize(new java.awt.Dimension(250, 300));
 
@@ -56,6 +55,7 @@ public class LoginView extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
+        loginButton.setForeground(new java.awt.Color(204, 0, 51));
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +68,7 @@ public class LoginView extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("XYZ Medical");
 
+        registerButton.setForeground(new java.awt.Color(204, 0, 51));
         registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +110,7 @@ public class LoginView extends javax.swing.JFrame {
                 .addComponent(loginButton)
                 .addGap(18, 18, 18)
                 .addComponent(registerButton)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
